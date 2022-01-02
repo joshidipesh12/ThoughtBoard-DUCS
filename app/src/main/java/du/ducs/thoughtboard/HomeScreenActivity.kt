@@ -6,8 +6,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.DatePicker
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,9 +22,9 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
 
         //This is just for now when we will work with data we'll set it to last date of data
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-        val myDate: Date? = Calendar.getInstance().time
-        sdf.applyPattern("EEEE, d MMM yy")
-        val sMyDate: String = sdf.format(myDate)
+
+        sdf.applyPattern("EEEE, dd MMM yy")
+        val sMyDate: String = sdf.format(Calendar.getInstance().time)
         supportActionBar?.title = sMyDate
 
 
@@ -58,10 +58,13 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-        val myDate = sdf.parse("$dayOfMonth/$month/$year")
-        sdf.applyPattern("EEEE, d MMM yy")
-        val sMyDate: String = sdf.format(myDate)
+
+        val calendar = Calendar.getInstance()
+        calendar.set(year,month,dayOfMonth)
+
+        val sdf = SimpleDateFormat("EEEE, dd MMM yy", Locale.ENGLISH)
+        val sMyDate: String = sdf.format(calendar.time)
+
         supportActionBar?.title = sMyDate
 
     }
