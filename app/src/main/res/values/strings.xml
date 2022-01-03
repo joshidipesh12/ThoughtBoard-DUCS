@@ -3,4 +3,8 @@
     <string name="new_message">Create New Message</string>
     <string name="about_us">About Us</string>
     <string name="home_screen_menu">Home Screen Menu</string>
+    <string name="todo">TODO</string>
+    <string name="message">message</string>
+    <string name="title">title</string>
+
 </resources>

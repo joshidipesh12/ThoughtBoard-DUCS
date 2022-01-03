@@ -1,23 +1,31 @@
 package du.ducs.thoughtboard
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.DatePicker
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListener{
+
+    private lateinit var recyclerView: RecyclerView
+    private var dataList= mutableListOf<DataModel>()
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
 
 
-        val toolbar : Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         //This is just for now when we will work with data we'll set it to last date of data
@@ -27,10 +35,21 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
         val sMyDate: String = sdf.format(Calendar.getInstance().time)
         supportActionBar?.title = sMyDate
 
-
+        val image1: ImageView = findViewById(R.id.imageView)
+        val image2: ImageView = findViewById(R.id.imageView)
+        recyclerView =findViewById(R.id.recyclerView)
+        recyclerView.layoutManager=GridLayoutManager(applicationContext,2)
+        val email = " "
+        val message = " "
+        val username = " "
+        val array = arrayOf(email, message, username, title, sMyDate)
+        if (array.isEmpty())
+        {
+            image1.setImageResource(R.drawable.no_msg_image)
+            image2.setImageResource(R.drawable.msg_image)
+        }
+        dataList.add(DataModel("title","message"))
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu) : Boolean{
         val inflater : MenuInflater = menuInflater
@@ -68,5 +87,7 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
         supportActionBar?.title = sMyDate
 
     }
+
+
 
 }
