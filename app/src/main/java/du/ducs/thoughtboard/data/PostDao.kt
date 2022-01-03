@@ -7,7 +7,7 @@ import java.util.*
 @Dao
 interface PostDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPost(post: Post)
+    suspend fun insertPost(post: Post) : Long
 
     @Update
     suspend fun updatePost(post: Post)
