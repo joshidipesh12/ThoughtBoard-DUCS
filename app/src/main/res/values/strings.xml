@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Thought Board DUCS</string>
+    <string name="new_message">Create New Message</string>
+    <string name="about_us">About Us</string>
+    <string name="home_screen_menu">Home Screen Menu</string>
+    <string name="thought_board">Thought Board</string>
 </resources>
