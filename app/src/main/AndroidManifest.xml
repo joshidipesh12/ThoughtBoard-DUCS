@@ -14,6 +14,15 @@
         <activity
             android:name=".HomeSigninActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".NewMessageActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".HomeScreenActivity"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
