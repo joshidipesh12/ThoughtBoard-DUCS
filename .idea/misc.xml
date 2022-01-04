@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/activity_home_screen.xml" value="0.3229604709840202" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/activity_home_signin.xml" value="0.33" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/activity_new_message.xml" value="0.22" />
+        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/card_layout.xml" value="0.2" />
+        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/menu/layout_home_screen_menu.xml" value="0.12864583333333332" />
+        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/menu/menu_new_message.xml" value="0.12864583333333332" />
+        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/menu/nav_item.xml" value="0.25" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1484375" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoardDUCS/app/src/main/res/layout/activity_main.xml" value="0.2" />
       </map>

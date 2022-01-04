@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,7 +20,8 @@ import java.util.*
 class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListener{
 
     private lateinit var recyclerView: RecyclerView
-    private var dataList= mutableListOf<DataModel>()
+    private var dataList = mutableListOf<DataModel>()
+
     @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,18 +38,26 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
         val sMyDate: String = sdf.format(Calendar.getInstance().time)
         supportActionBar?.title = sMyDate
 
-        val image1: ImageView = findViewById(R.id.imageView)
-        val image2: ImageView = findViewById(R.id.imageView)
-        recyclerView =findViewById(R.id.recyclerView)
-        recyclerView.layoutManager=GridLayoutManager(applicationContext,2)
+        val emptyImage: ImageView = findViewById(R.id.no_message_image)
+        val emptyText1: TextView = findViewById(R.id.no_message_text_1)
+        val emptyText2: TextView = findViewById(R.id.no_message_text_2)
+
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = GridLayoutManager(applicationContext,2)
+
+        // TODO (fix recyclerView design with dummy lorem ipsum data)
+        // here the array is of Object[email, username, title, message, date]
+        // take example from affirmations app's DataSource
+        // https://github.com/google-developer-training/android-basics-kotlin-affirmations-app-solution
         val email = " "
         val message = " "
         val username = " "
         val array = arrayOf(email, message, username, title, sMyDate)
         if (array.isEmpty())
         {
-            image1.setImageResource(R.drawable.no_msg_image)
-            image2.setImageResource(R.drawable.msg_image)
+            emptyImage.visibility = View.VISIBLE
+            emptyText1.visibility = View.VISIBLE
+            emptyText2.visibility = View.VISIBLE
         }
         dataList.add(DataModel("title","message"))
     }
