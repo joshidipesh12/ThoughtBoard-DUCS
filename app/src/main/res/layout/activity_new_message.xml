@@ -24,6 +24,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:hintTextColor="@color/light_blue"
+        app:boxStrokeColor="@color/light_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title"
@@ -34,7 +36,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            tools:ignore="TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,6 +45,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newMessage"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:hintTextColor="@color/light_blue"
+        app:boxStrokeColor="@color/light_blue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="@string/message"
@@ -63,7 +68,8 @@
             android:scrollbarStyle="insideInset"
             android:scrollbarThumbVertical="@drawable/ic_drawable_scroll_indicator"
             android:scrollbars="vertical"
-            android:verticalScrollbarPosition="right" />
+            android:verticalScrollbarPosition="right"
+            tools:ignore="TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
