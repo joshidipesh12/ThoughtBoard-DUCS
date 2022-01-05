@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".HomeSigninActivity">
+    tools:context=".HomeSignInActivity">
 
 
     <ImageView
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin_btn"
-        app:layout_constraintVertical_bias="0.482"
+        app:layout_constraintVertical_bias="0.529"
         app:srcCompat="@drawable/gdsc_logo"
         tools:ignore="HardcodedText" />
 

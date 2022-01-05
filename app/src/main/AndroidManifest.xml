@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="du.ducs.thoughtboard">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,13 +16,22 @@
         <activity
             android:name=".AboutUsActivity"
             android:exported="false" />
-        <activity
-            android:name=".HomeSigninActivity"
-            android:exported="false" />
+      
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
+            android:exported="true" />
+      
+        <activity
+            android:name=".NewMessageActivity"
+            android:exported="false"/>
+      
+        <activity
+            android:name=".HomeScreenActivity"
+            android:exported="false" />
+      
+        <activity
+            android:name=".HomeSignInActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

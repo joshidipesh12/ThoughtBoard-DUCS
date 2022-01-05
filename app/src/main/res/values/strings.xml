@@ -3,6 +3,7 @@
     <string name="new_message">Create New Message</string>
     <string name="about_us">About Us</string>
     <string name="home_screen_menu">Home Screen Menu</string>
+    <string name="todo">TODO</string>
     <string name="thought_board">Thought Board</string>
     <string name="ducs">Department of Computer Science
         \n University of Delhi</string>
@@ -17,4 +18,10 @@
         Undergraduate CBCS programmes - B.Sc. (H) Computer Science, B.Sc. Physical / Mathematical Sciences and B.A. Programme (Discipline Courses in Computer Applications) are offered by the University of Delhi through its constituent colleges.\n
         With rapidly evolving technology and the continuous need for innovation, the Department has produced quality professionals holding important positions in the IT industry in India and abroad.\n\n\n
     </string>
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="back">Back</string>
+    <string name="send">Send</string>
+    <string name="no_messages_found">No Messages Found!</string>
+    <string name="tap_the_icon_to_create_one">Tap the + Icon to Create One</string>
 </resources>

@@ -1,36 +1,67 @@
 package du.ducs.thoughtboard
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.DatePicker
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListener{
+
+    private lateinit var recyclerView: RecyclerView
+    private var dataList = mutableListOf<DataModel>()
+
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
 
 
-        val toolbar : Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         //This is just for now when we will work with data we'll set it to last date of data
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
         sdf.applyPattern("EEEE, dd MMM yy")
-        val sMyDate: String = sdf.format(Calendar.getInstance().time)
+        var sMyDate: String = sdf.format(Calendar.getInstance().time)
         supportActionBar?.title = sMyDate
 
+        val emptyImage: ImageView = findViewById(R.id.no_message_image)
+        val emptyText1: TextView = findViewById(R.id.no_message_text_1)
+        val emptyText2: TextView = findViewById(R.id.no_message_text_2)
 
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = GridLayoutManager(applicationContext,2)
+
+        // TODO (fix recyclerView design with dummy lorem ipsum data)
+        // here the array is of Object[email, username, title, message, date]
+        // take example from affirmations app's DataSource
+        // https://github.com/google-developer-training/android-basics-kotlin-affirmations-app-solution
+        val email = "ishika@gmail.com"
+        val message = "Hello"
+        val username = "ishika"
+        sMyDate="05-01-2022"
+        val array = arrayOf(email, message, username, title, sMyDate)
+        if (array.isEmpty())
+        {
+            emptyImage.visibility = View.VISIBLE
+            emptyText1.visibility = View.VISIBLE
+            emptyText2.visibility = View.VISIBLE
+        }
+        dataList.add(DataModel("title","message"))
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu) : Boolean{
         val inflater : MenuInflater = menuInflater
@@ -68,5 +99,7 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
         supportActionBar?.title = sMyDate
 
     }
+
+
 
 }
