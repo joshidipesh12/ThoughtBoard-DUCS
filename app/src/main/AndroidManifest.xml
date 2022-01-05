@@ -16,17 +16,23 @@
         <activity
             android:name=".HomeSignInActivity"
             android:exported="true" >
+
+        <activity
+            android:name=".NewMessageActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".HomeScreenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-
         </activity>
     </application>
 
