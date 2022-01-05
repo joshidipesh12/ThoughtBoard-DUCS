@@ -35,6 +35,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             tools:ignore="TextContrastCheck" />
@@ -60,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/title">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/newMessageEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top|start"
