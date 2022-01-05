@@ -35,7 +35,7 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
         sdf.applyPattern("EEEE, dd MMM yy")
-        var sMyDate: String = sdf.format(Calendar.getInstance().time)
+        val sMyDate: String = sdf.format(Calendar.getInstance().time)
         supportActionBar?.title = sMyDate
 
         val emptyImage: ImageView = findViewById(R.id.no_message_image)
@@ -49,12 +49,10 @@ class HomeScreenActivity : AppCompatActivity() , DatePickerDialog.OnDateSetListe
         // here the array is of Object[email, username, title, message, date]
         // take example from affirmations app's DataSource
         // https://github.com/google-developer-training/android-basics-kotlin-affirmations-app-solution
-        val email = "ishika@gmail.com"
-        val message = "hello"
-        val username = "ishika"
-        sMyDate = "05-01-2022"
-        title="random title"
-        val array = arrayOf(email,username,message,title,sMyDate)
+        val email = " "
+        val message = " "
+        val username = " "
+        val array = arrayOf(email, message, username, title, sMyDate)
         if (array.isEmpty())
         {
             emptyImage.visibility = View.VISIBLE
