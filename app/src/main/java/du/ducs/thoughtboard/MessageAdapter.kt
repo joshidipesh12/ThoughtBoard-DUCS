@@ -15,7 +15,6 @@ class MessageAdapter(var context: Context):RecyclerView.Adapter<MessageAdapter.V
 
 
         init {
-
         }
     }
 
@@ -25,13 +24,13 @@ class MessageAdapter(var context: Context):RecyclerView.Adapter<MessageAdapter.V
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageAdapter.ViewHolder {
         TODO("Not yet implemented")
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
+        var view =LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
     }
 
     override fun onBindViewHolder(holder: MessageAdapter.ViewHolder, position: Int) {
         TODO("Not yet implemented")
 
-        var data = dataList[position]
+        var data=dataList[position]
 
     }
 
