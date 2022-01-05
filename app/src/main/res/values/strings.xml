@@ -4,7 +4,11 @@
     <string name="about_us">About Us</string>
     <string name="home_screen_menu">Home Screen Menu</string>
     <string name="todo">TODO</string>
-    <string name="message">message</string>
-    <string name="title">title</string>
-
+    <string name="thought_board">Thought Board</string>
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="back">Back</string>
+    <string name="send">Send</string>
+    <string name="no_messages_found">No Messages Found!</string>
+    <string name="tap_the_icon_to_create_one">Tap the + Icon to Create One</string>
 </resources>

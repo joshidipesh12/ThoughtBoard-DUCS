@@ -31,7 +31,6 @@ class MessageAdapter(var context: Context):RecyclerView.Adapter<MessageAdapter.V
         TODO("Not yet implemented")
 
         var data=dataList[position]
-
     }
 
     override fun getItemCount(): Int=dataList.size

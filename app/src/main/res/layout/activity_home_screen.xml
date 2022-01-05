@@ -4,8 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".HomeScreenActivity">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="676dp"
+        app:layoutManager="GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,20 +33,21 @@
         app:titleTextColor="@color/design_default_color_on_primary" />
 
 
-      <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/about"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/about_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/about_us"
         app:backgroundTint="@color/light_blue"
-        app:layout_constraintBottom_toTopOf="@+id/new_msg"
+        app:layout_constraintBottom_toTopOf="@+id/new_msg_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_drawable_about" />
+        app:srcCompat="@drawable/ic_drawable_about"
+        tools:ignore="ImageContrastCheck" />
 
-      <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/new_msg"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_msg_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -42,37 +57,45 @@
         android:src="@drawable/ic_drawable_new_message"
         app:backgroundTint="@color/light_blue"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
-        android:id="@+id/image"
-        android:layout_width="202dp"
-        android:layout_height="219dp"
+        android:id="@+id/no_message_image"
+        android:layout_width="260dp"
+        android:layout_height="236dp"
+        android:layout_marginTop="124dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:srcCompat="@drawable/no_msg_image" />
+        app:srcCompat="@drawable/no_message_image"
+        android:visibility="gone"/>
 
-    <ImageView
-        android:id="@+id/no_msg"
+    <TextView
+        android:id="@+id/no_message_text_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/msg_image"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="348dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/no_messages_found"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_message_image"
+        app:layout_constraintVertical_bias="0.084"
+        android:visibility="gone"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="676dp"
-        app:layoutManager="GridLayoutManager"
+    <TextView
+        android:id="@+id/no_message_text_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tap_the_icon_to_create_one"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/no_message_text_1"
+        app:layout_constraintVertical_bias="0.027"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
