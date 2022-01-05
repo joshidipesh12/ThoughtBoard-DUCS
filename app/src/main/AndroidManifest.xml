@@ -15,7 +15,7 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".HomeSignInActivity"
-            android:exported="true" >
+            android:exported="true" />
 
         <activity
             android:name=".NewMessageActivity"
