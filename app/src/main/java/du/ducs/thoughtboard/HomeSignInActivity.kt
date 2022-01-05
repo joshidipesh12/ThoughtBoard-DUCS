@@ -2,28 +2,18 @@ package du.ducs.thoughtboard
 
 import android.content.Intent
 import android.content.IntentSender
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.viewbinding.BuildConfig
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.android.material.snackbar.Snackbar
-import kotlin.math.sign
-import com.google.android.gms.tasks.Task
-
-import androidx.annotation.NonNull
-
-import com.google.android.gms.tasks.OnCompleteListener
-
-
 
 
 class HomeSignInActivity : AppCompatActivity() {
@@ -82,9 +72,9 @@ class HomeSignInActivity : AppCompatActivity() {
 
     private fun signOut() {
         oneTapClient?.signOut()
-            ?.addOnCompleteListener(this, OnCompleteListener<Void?> {
+            ?.addOnCompleteListener(this) {
                 Toast.makeText(baseContext, "Logged you out", Toast.LENGTH_SHORT).show()
-            })
+            }
     }
 
 

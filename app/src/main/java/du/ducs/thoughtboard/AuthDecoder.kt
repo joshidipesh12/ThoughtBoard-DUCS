@@ -10,13 +10,12 @@ object AuthDecoder {
     @Throws(Exception::class)
     fun decoded(JWTEncoded: String): Boolean {
         try {
-            val split = JWTEncoded.split("\\.").toTypedArray()
-            Log.d("JWT_DECODED", "Header: " + getJson(split[0]))
-            Log.d("JWT_DECODED", "Body: " + getJson(split[1]))
-            val jsonObj = JSONObject(getJson(split[1]))
+            val payload = JWTEncoded.split(".")[1]
+            val jsonObj = JSONObject(getJson(payload))
             val name = jsonObj.getString("name")
             val email = jsonObj.getString("email")
-            return email.contains("cs.du.ac.in")
+            Log.d("JWT_DECODER", "Name: $name, Email: $email")
+            return email.contains("@cs.du.ac.in") && name.isNotEmpty()
         } catch (e: UnsupportedEncodingException) {
             //Error
         }

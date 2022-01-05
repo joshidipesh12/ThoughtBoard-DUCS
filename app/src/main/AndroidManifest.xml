@@ -14,7 +14,7 @@
         android:theme="@style/Theme.ThoughtBoardDUCS"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".HomeSignInActivity"
+            android:name=".MainActivity"
             android:exported="true" />
 
         <activity
@@ -26,7 +26,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeSignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
