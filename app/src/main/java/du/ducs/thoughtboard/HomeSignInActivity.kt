@@ -122,7 +122,7 @@ class HomeSignInActivity : AppCompatActivity() {
             }
             ?.addOnFailureListener(this) { e ->
                 // No Google Accounts found. Just continue presenting the signed-out UI.
-                displaySignUp()
+//                displaySignUp()
                 Log.d("btn click", e.localizedMessage!!)
             }
     }
@@ -139,7 +139,7 @@ class HomeSignInActivity : AppCompatActivity() {
             }
             ?.addOnFailureListener(this) { e ->
                 // No Google Accounts found. Just continue presenting the signed-out UI.
-                displaySignUp()
+//                displaySignUp()
                 Log.d("btn click", e.localizedMessage!!)
             }
     }

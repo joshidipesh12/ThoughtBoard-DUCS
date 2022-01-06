@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="du.ducs.thoughtboard">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,21 +14,20 @@
         android:theme="@style/Theme.ThoughtBoardDUCS"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".MessageScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".AboutUsActivity"
             android:exported="false" />
-      
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-      
         <activity
             android:name=".NewMessageActivity"
-            android:exported="false"/>
-      
+            android:exported="false" />
         <activity
             android:name=".HomeScreenActivity"
             android:exported="false" />
-      
         <activity
             android:name=".HomeSignInActivity"
             android:exported="true">
