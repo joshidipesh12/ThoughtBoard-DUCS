@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/layout/activity_about_us.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_home_screen.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_home_signin.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/activity_home_signin.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_message_screen.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_new_message.xml" value="0.259375" />

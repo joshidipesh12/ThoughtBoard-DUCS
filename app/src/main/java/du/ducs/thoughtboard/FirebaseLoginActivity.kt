@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -42,7 +43,7 @@ class FirebaseLoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         // [END initialize_auth]
 
-        findViewById<Button>(R.id.signin_btn).setOnClickListener { signIn() }
+        findViewById<SignInButton>(R.id.signin_btn).setOnClickListener { signIn() }
     }
 
     override fun onStart() {
