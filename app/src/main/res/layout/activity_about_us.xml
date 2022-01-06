@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutUsActivity"
+    android:background="@color/white">
+
+
+    <ScrollView
+        android:layout_width="414dp"
+        android:layout_height="732dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="253dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="25dp"
+                android:text="@string/thought_board"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.487"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.043" />
+
+            <TextView
+                android:id="@+id/department_subheading"
+                android:layout_width="256dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="1dp"
+                android:text="@string/ducs"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading"
+                tools:ignore="TextContrastCheck" />
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="140dp"
+                android:layout_height="149dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="200dp"
+                android:contentDescription="@string/todo"
+                app:layout_constraintEnd_toStartOf="@+id/heart"
+                app:layout_constraintHorizontal_bias="0.62"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/app_logo"
+                tools:ignore="ImageContrastCheck" />
+
+            <ImageView
+                android:id="@+id/heart"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="80dp"
+                android:contentDescription="@string/todo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/department_subheading"
+                app:layout_constraintVertical_bias="0.001"
+                app:srcCompat="@drawable/heart_vector" />
+
+            <ImageView
+                android:id="@+id/ducs_logo"
+                android:layout_width="113dp"
+                android:layout_height="89dp"
+                android:layout_marginTop="230dp"
+                android:layout_marginEnd="40dp"
+                android:contentDescription="@string/todo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.447"
+                app:layout_constraintStart_toEndOf="@+id/heart"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gdsc_logo" />
+
+            <TextView
+                android:id="@+id/department_subheading2"
+                android:layout_width="190dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="210dp"
+                android:text="@string/made_with_love_by_ducs_developers"
+                android:textAlignment="center"
+                android:textColor="#504F4F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+            <TextView
+                android:id="@+id/department_subheading3"
+                android:layout_width="303dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="290dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/about_the_department"
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+            <TextView
+                android:id="@+id/department_subheading4"
+                android:layout_width="303dp"
+                android:layout_height="579dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="332dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="50dp"
+                android:justificationMode="inter_word"
+                android:text="@string/about_description"
+                android:textAlignment="textStart"
+                android:textColor="#504F4F"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading"
+                tools:targetApi="o" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

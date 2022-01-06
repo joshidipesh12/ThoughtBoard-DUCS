@@ -2,28 +2,18 @@ package du.ducs.thoughtboard
 
 import android.content.Intent
 import android.content.IntentSender
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.viewbinding.BuildConfig
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.android.material.snackbar.Snackbar
-import kotlin.math.sign
-import com.google.android.gms.tasks.Task
-
-import androidx.annotation.NonNull
-
-import com.google.android.gms.tasks.OnCompleteListener
-
-
 
 
 class HomeSignInActivity : AppCompatActivity() {
@@ -31,7 +21,7 @@ class HomeSignInActivity : AppCompatActivity() {
     private var oneTapClient: SignInClient? = null
     private var signUpRequest: BeginSignInRequest? = null
     private var signInRequest: BeginSignInRequest? = null
-    private val WEB_CLIENT_ID: String = "WEB_CLIENT_ID"
+    private val webClientId: String = BuildConfig.ONE_TAP_WEB_CLIENT_ID
 
     private val oneTapResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){ result ->
         try {
@@ -82,9 +72,9 @@ class HomeSignInActivity : AppCompatActivity() {
 
     private fun signOut() {
         oneTapClient?.signOut()
-            ?.addOnCompleteListener(this, OnCompleteListener<Void?> {
+            ?.addOnCompleteListener(this) {
                 Toast.makeText(baseContext, "Logged you out", Toast.LENGTH_SHORT).show()
-            })
+            }
     }
 
 
@@ -98,7 +88,7 @@ class HomeSignInActivity : AppCompatActivity() {
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     // Your server's client ID, not your Android client ID.
-                    .setServerClientId(WEB_CLIENT_ID)
+                    .setServerClientId(webClientId)
                     // Show all accounts on the device.
                     .setFilterByAuthorizedAccounts(false)
                     .build())
@@ -108,7 +98,7 @@ class HomeSignInActivity : AppCompatActivity() {
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     // Your server's client ID, not your Android client ID.
-                    .setServerClientId(WEB_CLIENT_ID)
+                    .setServerClientId(webClientId)
                     // Show all accounts on the device.
                     .setFilterByAuthorizedAccounts(true)
                     .build())
@@ -132,7 +122,7 @@ class HomeSignInActivity : AppCompatActivity() {
             }
             ?.addOnFailureListener(this) { e ->
                 // No Google Accounts found. Just continue presenting the signed-out UI.
-                displaySignUp()
+//                displaySignUp()
                 Log.d("btn click", e.localizedMessage!!)
             }
     }
@@ -149,7 +139,7 @@ class HomeSignInActivity : AppCompatActivity() {
             }
             ?.addOnFailureListener(this) { e ->
                 // No Google Accounts found. Just continue presenting the signed-out UI.
-                displaySignUp()
+//                displaySignUp()
                 Log.d("btn click", e.localizedMessage!!)
             }
     }

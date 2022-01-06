@@ -5,7 +5,7 @@ Thought Board DUCS
 
 <b> Problem Statement: </b>
 
-In our Department of Computer Science, University of Delhi, students from MCA and MSC Computer Science, work together on multiple occasions and colaboration on these events need a large number of students to be brought at one place for sharing their thoughts. This process leads to the creation of innumerous Whatsapp groups every year. These groups in-turn remains as a part of students chat history and can't be accessed by the students of the next academic year (if they want to access ideas/resources). Also, there is a limit of 256 members on the number of participants in a whatsapp group hindering a proper communication between seniors & juniors, and not every students agrees to make an account on some other services like Signal, Telegram, etc. This overall screnario creates a feeling of detachment among the students.
+In Department of Computer Science, University of Delhi, students from MCA and MSC Computer Science, work together on multiple occasions and colaboration on these events need a large number of students to be brought at one place for sharing their thoughts. This process leads to the creation of innumerous Whatsapp groups every year. These groups in-turn remains as a part of students chat history and can't be accessed by the students of the next academic year (if they want to access ideas/resources). Also, there is a limit of 256 members on the number of participants in a whatsapp group hindering a proper communication between seniors & juniors, and not every students agrees to make an account on some other services like Signal, Telegram, etc. This overall screnario creates a feeling of detachment among the students.
 
 <b> Proposed Solution : </b>
 
