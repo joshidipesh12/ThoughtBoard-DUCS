@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
 }
+apply plugin: 'com.google.gms.google-services'
 
 static def getApiKey(){
     Properties props = new Properties()
@@ -48,6 +49,10 @@ android {
 }
 
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
