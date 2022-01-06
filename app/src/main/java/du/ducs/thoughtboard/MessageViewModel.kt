@@ -40,7 +40,6 @@ class MessageViewModel : ViewModel() {
     private val db = Firebase.firestore
 
     private val _messages = MutableLiveData<List<Message>>()
-
     // observe this variable to get new message updates
     val messages: LiveData<List<Message>>
         get() = _messages
