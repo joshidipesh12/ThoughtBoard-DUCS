@@ -8,7 +8,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import java.util.*
+import kotlinx.datetime.*
 import kotlin.collections.HashMap
 
 const val TAG = "MessageViewModel"
@@ -18,7 +18,7 @@ data class Message(
     var id: String? = null,
     var title: String? = null,
     var message: String? = null,
-    var timestamp: Timestamp = Timestamp.now(),
+    var timestamp: Long = Timestamp.now().nanoseconds.toLong(),
     var userId: String? = null,
     var emailId: String? = null
 ) {
@@ -35,11 +35,12 @@ data class Message(
     }
 }
 
-class MessageViewModel: ViewModel() {
+class MessageViewModel : ViewModel() {
 
     private val db = Firebase.firestore
 
     private val _messages = MutableLiveData<List<Message>>()
+
     // observe this variable to get new message updates
     val messages: LiveData<List<Message>>
         get() = _messages
@@ -59,10 +60,11 @@ class MessageViewModel: ViewModel() {
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 
-    fun setDateFiler(date: Date) {
+    // datetime object should have the hours, minutes, seconds set to zero
+    fun setDateFiler(dateTime: LocalDateTime) {
         db.collection(COLLECTION)
-//            .whereGreaterThan("timestamp", getDayEndTimeStamp())
-//            .whereLessThan("timestamp", getDayStartTimeStamp())
+            .whereGreaterThan("timestamp", getDayOneTimeStamp(dateTime))
+            .whereLessThan("timestamp", getDayTwoTimeStamp(dateTime))
             .addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.d(TAG, "listen failed", e)
@@ -78,15 +80,22 @@ class MessageViewModel: ViewModel() {
                     }
                 }
                 _messages.value = newMessageList
+                Log.d(TAG, "Messages: ${_messages.value}")
             }
     }
 
-    private fun getDayEndTimeStamp(): Timestamp {
-        return Timestamp.now()
+    private fun getDayTwoTimeStamp(dateTime: LocalDateTime): Long {
+        val timeInstant = dateTime.toInstant(TimeZone.currentSystemDefault())
+        val timeInstantOneDayLater =
+            timeInstant.plus(1, DateTimeUnit.DAY, TimeZone.currentSystemDefault())
+        Log.d(TAG, "Time 2: ${timeInstantOneDayLater.epochSeconds}")
+        return timeInstantOneDayLater.epochSeconds
     }
 
-    private fun getDayStartTimeStamp(): Timestamp {
-        return Timestamp.now()
+    private fun getDayOneTimeStamp(dateTime: LocalDateTime): Long {
+        val timeInstant = dateTime.toInstant(TimeZone.currentSystemDefault())
+        Log.d(TAG, "Time 1: ${timeInstant.epochSeconds}")
+        return timeInstant.epochSeconds
     }
 
 }
