@@ -3,6 +3,20 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
 }
+apply plugin: 'com.google.gms.google-services'
+
+static def getApiKey() {
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('secrets.properties')))
+    return props['ONE_TAP_WEB_CLIENT_ID']
+}
+
+static def getFirebaseClientId() {
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('secrets.properties')))
+    return props['FIREBASE_GOOGLE_AUTH_CLIENT_ID']
+}
+
 
 android {
     compileSdk 31
@@ -15,6 +29,7 @@ android {
         versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [ONE_TAP_WEB_CLIENT_ID: getApiKey()]
     }
 
     buildTypes {
@@ -23,6 +38,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.buildConfigField "String", "ONE_TAP_WEB_CLIENT_ID", "\"" + getApiKey() + "\""
+        variant.buildConfigField "String", "FIREBASE_GOOGLE_AUTH_CLIENT_ID", "\"" + getFirebaseClientId() + "\""
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -36,19 +57,27 @@ android {
 }
 
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    //noinspection GradleDependency
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
+    implementation 'androidx.core:core-splashscreen:1.0.0-alpha02'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.0.1'
     implementation 'androidx.room:room-runtime:2.4.0'
     implementation "androidx.room:room-ktx:2.4.0"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.activity:activity-ktx:1.4.0'
     //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //noinspection GradleDependency
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //noinspection GradleDynamicVersion,GradleDependency
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

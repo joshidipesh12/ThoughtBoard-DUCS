@@ -21,7 +21,7 @@ class HomeSignInActivity : AppCompatActivity() {
     private var oneTapClient: SignInClient? = null
     private var signUpRequest: BeginSignInRequest? = null
     private var signInRequest: BeginSignInRequest? = null
-    private val WEB_CLIENT_ID: String = "WEB_CLIENT_ID"
+    private val webClientId: String = BuildConfig.ONE_TAP_WEB_CLIENT_ID
 
     private val oneTapResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){ result ->
         try {
@@ -88,7 +88,7 @@ class HomeSignInActivity : AppCompatActivity() {
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     // Your server's client ID, not your Android client ID.
-                    .setServerClientId(WEB_CLIENT_ID)
+                    .setServerClientId(webClientId)
                     // Show all accounts on the device.
                     .setFilterByAuthorizedAccounts(false)
                     .build())
@@ -98,7 +98,7 @@ class HomeSignInActivity : AppCompatActivity() {
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     // Your server's client ID, not your Android client ID.
-                    .setServerClientId(WEB_CLIENT_ID)
+                    .setServerClientId(webClientId)
                     // Show all accounts on the device.
                     .setFilterByAuthorizedAccounts(true)
                     .build())

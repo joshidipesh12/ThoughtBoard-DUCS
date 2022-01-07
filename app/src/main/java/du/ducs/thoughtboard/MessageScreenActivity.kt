@@ -47,9 +47,9 @@ class MessageScreenActivity : AppCompatActivity() {
             startActivity(emailIntent)
         })
 
-        binding.messageTitle.text = dummy_title
-        binding.messageAuthor.text = dummy_name
-        binding.messageContent.text = "$dummy_message $dummy_message"
+        binding.messageTitle.text = R.string.dummy_title.toString()
+        binding.messageAuthor.text = R.string.dummy_author.toString()
+        binding.messageContent.text = "${R.string.dummy_message} ${R.string.dummy_message}"
 
 
         val users = runBlocking {
