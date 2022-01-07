@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         Log.d(TAG, "Auth user email: ${auth.currentUser?.email}")
         if (auth.currentUser != null) {
-//            startActivity(Intent(this,HomeScreenActivity::class.java))
+            // TODO(Setup Navigation here)
+//            startActivity(Intent(this,MainActivity2::class.java))
             finish()
         } else {
             Log.d(TAG, "Starting Sign-in Process")

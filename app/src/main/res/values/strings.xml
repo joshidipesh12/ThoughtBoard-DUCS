@@ -15,7 +15,7 @@
         \nThe Department started 2-year M.Sc. Computer Science programme in the year 2004 with the aim to develop core competence in Computer Science and prepare the students to carry out development work, as well as take up challenges in research.\n
         \n\nBesides these, the Department offers Doctor of Philosophy (Ph.D.) in Computer Science aimed at producing quality researchers and high-impact interdisciplinary research.\n
         Undergraduate CBCS programmes - B.Sc. (H) Computer Science, B.Sc. Physical / Mathematical Sciences and B.A. Programme (Discipline Courses in Computer Applications) are offered by the University of Delhi through its constituent colleges.\n
-        With rapidly evolving technology and the continuous need for innovation, the Department has produced quality professionals holding important positions in the IT industry in India and abroad.\n\n\n
+        With rapidly evolving technology and the continuous need for innovation, the Department has produced quality professionals holding important positions in the IT industry in India and abroad.
     </string>
     <string name="dummy_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque sed egestas aliquam</string>
     <string name="dummy_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porta quis mauris metus, vel ut amet sed nunc. Facilisis est sit volutpat hac platea purus elementum, id. Aliquam morbi lobortis augue viverra. Eget velit venenatis tortor purus rhoncus metus.Eu suspendisse libero potenti nunc aliquam. Ac fermentum et viverra tellus risus, nunc. Ultrices sed venenatis eget dui mauris nulla quis fermentum. Mattis ac arcu tristique praesent cum feugiat gravida et ut. Egestas ullamcorper mauris fringilla et interdum feugiat pretium erat volutpat. Tristique purus morbi non pharetra orci. Vitae, risus mauris pretium tortor in consectetur. Tellus sem lectus dui orci facilisis amet.</string>
@@ -30,4 +30,9 @@
     <string name="delete_message">delete_message</string>
     <string name="mailto_email">mailto_email</string>
     <string name="message_screen_menu">message screen menu</string>
+    <string name="app_logo">app_logo</string>
+    <string name="department_of_computer_science_university_of_delhi">Department of Computer Science\n University of Delhi</string>
+    <string name="with_ducs_domain_email">With DUCS Domain Email</string>
+    <string name="gdsc_logo">gdsc_logo</string>
+    <item name="nav_host_fragment" type="id">nav_host_fragment</item>
 </resources>
