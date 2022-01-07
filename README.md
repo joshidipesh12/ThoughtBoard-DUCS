@@ -18,7 +18,7 @@ This project proposes an Open-Chat Android Application for intradepartmental com
  - the user can reply on any message(post) though the email reply button on the message screen
  - the author of the message can delete his/her messages while he/she is an active students of the department (or they can contact the admin for message deletion)
 
-<!-- <img width="559" alt="sampleimages" src="https://user-images.githubusercontent.com/18289261/142846646-a6858641-ad88-43aa-b8bb-b690fd7126f1.png"> -->
+<img width="559" alt="sampleimages" src="./app-screenshots.png">
     	  	
 <b> Functionality & Concepts used : </b>
 
