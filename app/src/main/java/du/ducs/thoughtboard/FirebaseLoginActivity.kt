@@ -105,7 +105,8 @@ class FirebaseLoginActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-//            startActivity(Intent(this, HomeScreenActivity::class.java))
+            //TODO(Setup Navigation HERE)
+//            startActivity(Intent(this, MainActivity2::class.java))
             finish()
         }
     }
