@@ -2,6 +2,8 @@ package du.ducs.thoughtboard.model
 
 import com.google.firebase.Timestamp
 
+
+//TODO(Use MessageViewModel Instead of this)
 data class Message(
     var id: String? = null,
     var title: String? = null,
