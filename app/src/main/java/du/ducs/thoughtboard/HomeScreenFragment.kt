@@ -6,10 +6,10 @@ import android.view.*
 import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import du.ducs.thoughtboard.adapter.ItemAdapter
-import du.ducs.thoughtboard.data.DummyDataSource
+import du.ducs.thoughtboard.adapter.MessageTileAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,9 +17,14 @@ import java.util.*
 class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
     DatePickerDialog.OnDateSetListener, RecyclerView.OnItemTouchListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel: MessageViewModel by viewModels()
+    private lateinit var adapter: MessageTileAdapter
+
+    // Date formatter for the action bar title.
+    private val formatter = SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.ENGLISH)
+
+    // The calendar instance maintaining the current selected date.
+    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,15 +41,8 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
 
-        //This is just for now when we will work with data we'll set it to last date of data
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-
-        sdf.applyPattern("EEEE, dd MMM yyyy")
-        val sMyDate: String = sdf.format(Calendar.getInstance().time)
+        val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
-
-        // Initialize data.
-        val myDataset = DummyDataSource().loadDummyMessages()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = object : GridLayoutManager((activity as AppCompatActivity?)!!, 2){
@@ -53,9 +51,14 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
                 return true
             }
         }
-        recyclerView.adapter = ItemAdapter(this, myDataset)
-        recyclerView.setHasFixedSize(true)
 
+        adapter = MessageTileAdapter()
+        viewModel.messages.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
+        recyclerView.adapter = adapter
+        recyclerView.setHasFixedSize(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -70,36 +73,27 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
 
     private fun showDatePickerDialog()  {
         val datePickerDialog = DatePickerDialog(
-            (activity as AppCompatActivity?)!!,
-            this,
-            Calendar.getInstance().get(Calendar.YEAR),
-            Calendar.getInstance().get(Calendar.MONTH),
-            Calendar.getInstance().get(Calendar.DAY_OF_MONTH) )
+            activity!!, this,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
 
         datePickerDialog.show()
     }
 
     override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val calendar = Calendar.getInstance()
-        calendar.set(year,monthOfYear,dayOfMonth)
+        calendar.set(year, monthOfYear, dayOfMonth)
 
-        val sdf = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.ENGLISH)
-        val sMyDate: String = sdf.format(calendar.time)
-
+        val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        calendar.set(year, month, dayOfMonth)
 
-
-        val calendar = Calendar.getInstance()
-        calendar.set(year,month,dayOfMonth)
-
-        val sdf = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.ENGLISH)
-        val sMyDate: String = sdf.format(calendar.time)
-
+        val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
-
     }
 
     override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
