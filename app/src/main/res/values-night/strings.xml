@@ -5,4 +5,5 @@
     <string name="tap_the_icon_to_create_one">Tap the + Icon to Create One</string>
     <string name="delete_message">delete_message</string>
     <string name="mailto_email">mailto_email</string>
+    <string name="message_screen_menu">message screen menu</string>
 </resources>
