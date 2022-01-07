@@ -80,7 +80,7 @@ class HomeSignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_signin)
+        setContentView(R.layout.fragment_home_signin)
 
         oneTapClient = Identity.getSignInClient(this)
         signUpRequest = BeginSignInRequest.builder()

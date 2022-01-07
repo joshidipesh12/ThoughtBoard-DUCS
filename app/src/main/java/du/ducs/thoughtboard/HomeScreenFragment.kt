@@ -43,7 +43,7 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         val sMyDate: String = sdf.format(Calendar.getInstance().time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
 
-        // Initialize data.
+        //TODO(Use ViewModel Data Here)
         val myDataset = DummyDataSource().loadDummyMessages()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
