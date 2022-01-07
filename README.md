@@ -12,13 +12,13 @@ In Department of Computer Science, University of Delhi, students from MCA and MS
 This project proposes an Open-Chat Android Application for intradepartmental communications for Department of Computer Science, University of Delhi. In this application, 
  - the users can only login with DUCS domain email id (ending with @cs.du.ac.in), discarting the need of account creations, since every student gets a departmentally issued email id on admission
  - the sign in flow uses google's one tap for better authentication experience
- - the messgaes are displayed date wise and messages of ex-students will also be available for new students of further academic sessions
+ - the messages are displayed date wise and messages of ex-students will also be available for new students of further academic sessions
  - there is no limit on the number of users (active at a time), since only the currently working students will have access to the application.
  - the messages are grouped by dates for a better access to specific event related messgaes/resources.
  - the user can reply on any message(post) though the email reply button on the message screen
  - the author of the message can delete his/her messages while he/she is an active students of the department (or they can contact the admin for message deletion)
 
-<img width="559" alt="sampleimages" src="./app-screenshots.png">
+<img alt="sampleimages" src="./app-screenshots.png">
     	  	
 <b> Functionality & Concepts used : </b>
 
