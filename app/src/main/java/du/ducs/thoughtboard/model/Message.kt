@@ -1,9 +1,24 @@
 package du.ducs.thoughtboard.model
 
-import androidx.annotation.StringRes
+import com.google.firebase.Timestamp
 
 data class Message(
-    @StringRes val titleResourceId: Int,
-    @StringRes val messageResourceId: Int,
-    @StringRes val authorResourceId: Int,
-)
+    var id: String? = null,
+    var title: String? = null,
+    var message: String? = null,
+    var timestamp: Long = Timestamp.now().nanoseconds.toLong(),
+    var userId: String? = null,
+    var emailId: String? = null
+) {
+    // Create hashMap of data with id removed
+    // id is not to be stored in document
+    fun toHashMap(): HashMap<String, Any> {
+        return hashMapOf(
+            "title" to (title ?: ""),
+            "message" to (message ?: ""),
+            "timestamp" to timestamp,
+            "userId" to (userId ?: ""),
+            "emailId" to (emailId ?: "")
+        )
+    }
+}

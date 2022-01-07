@@ -4,36 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import du.ducs.thoughtboard.model.Message
 import kotlinx.datetime.*
-import kotlin.collections.HashMap
 
 const val TAG = "MessageViewModel"
 const val COLLECTION = "messages"
-
-data class Message(
-    var id: String? = null,
-    var title: String? = null,
-    var message: String? = null,
-    var timestamp: Long = Timestamp.now().nanoseconds.toLong(),
-    var userId: String? = null,
-    var emailId: String? = null
-) {
-    // Create hashMap of data with id removed
-    // id is not to be stored in document
-    fun toHashMap(): HashMap<String, Any> {
-        return hashMapOf(
-            "title" to (title ?: ""),
-            "message" to (message ?: ""),
-            "timestamp" to timestamp,
-            "userId" to (userId ?: ""),
-            "emailId" to (emailId ?: "")
-        )
-    }
-}
 
 class MessageViewModel : ViewModel() {
 
