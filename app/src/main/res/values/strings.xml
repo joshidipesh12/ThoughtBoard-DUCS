@@ -20,6 +20,7 @@
     <string name="dummy_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque sed egestas aliquam</string>
     <string name="dummy_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porta quis mauris metus, vel ut amet sed nunc. Facilisis est sit volutpat hac platea purus elementum, id. Aliquam morbi lobortis augue viverra. Eget velit venenatis tortor purus rhoncus metus.Eu suspendisse libero potenti nunc aliquam. Ac fermentum et viverra tellus risus, nunc. Ultrices sed venenatis eget dui mauris nulla quis fermentum. Mattis ac arcu tristique praesent cum feugiat gravida et ut. Egestas ullamcorper mauris fringilla et interdum feugiat pretium erat volutpat. Tristique purus morbi non pharetra orci. Vitae, risus mauris pretium tortor in consectetur. Tellus sem lectus dui orci facilisis amet.</string>
     <string name="dummy_author">Rishi Sharma</string>
+    <string name="dummy_email">rishi.sharma@gmail.com</string>
     <string name="title">Title</string>
     <string name="message">Message</string>
     <string name="back">Back</string>
@@ -28,4 +29,5 @@
     <string name="tap_the_icon_to_create_one">Tap the + Icon to Create One</string>
     <string name="delete_message">delete_message</string>
     <string name="mailto_email">mailto_email</string>
+    <string name="message_screen_menu">message screen menu</string>
 </resources>

@@ -13,34 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThoughtBoardDUCS"
         tools:ignore="AllowBackup">
-      
         <activity
             android:name=".FirebaseLoginActivity"
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-      
-        <activity
-            android:name=".MessageScreenActivity"
-            android:configChanges="orientation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-      
         <activity
             android:name=".AboutUsActivity"
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-      
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.App.Starting"
+            android:theme="@style/Theme.ThoughtBoardDUCS"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,21 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-      
-        <activity
-            android:name=".NewMessageActivity"
-            android:configChanges="orientation"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-      
         <activity
             android:name=".HomeSignInActivity"
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-      
     </application>
 
 </manifest>
