@@ -2,25 +2,25 @@ package du.ducs.thoughtboard
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import du.ducs.thoughtboard.databinding.FragmentNewMessageBinding
 
 class NewMessageFragment : Fragment() {
+    // The view binding to access views.
+    private var _binding: FragmentNewMessageBinding? = null
+    private val binding get() = _binding!!
 
-    private val viewModel : NewMessageViewModel by activityViewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel: MessageViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_message, container, false)
+    ): View {
+        _binding = FragmentNewMessageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,8 +28,7 @@ class NewMessageFragment : Fragment() {
 
         val activity: AppCompatActivity = (activity as AppCompatActivity?)!!
 
-        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        activity.setSupportActionBar(toolbar)
+        activity.setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
 
         activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -53,35 +52,21 @@ class NewMessageFragment : Fragment() {
 
             //onClick for send
             R.id.send -> {
-                val titleEditText = view?.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.titleEditText)
-                val newMessageEditText = view?.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.newMessageEditText)
+                val title   = binding.titleEditText.text.toString()
+                val message = binding.newMessageEditText.text.toString()
 
-                if(titleEditText?.text.toString().isNotBlank() && newMessageEditText?.text.toString().isNotBlank()) {
-                    onClickSendDialog()
+                if(title.isNotBlank() && message.isNotBlank()) {
+                    MaterialAlertDialogBuilder((activity as AppCompatActivity?)!!)
+                        .setTitle(R.string.confirm_send_dialog_msg)
+                        .setCancelable(true)
+                        .setPositiveButton("Yes") {
+                                _, _ -> viewModel.sendMessage(title, message)
+                        }
+                        .show()
                 }
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-
-    private fun onClickSendDialog() {
-        MaterialAlertDialogBuilder((activity as AppCompatActivity?)!!)
-            .setTitle("Are you sure, you want to send message ?")
-            .setCancelable(true)
-            .setPositiveButton("Yes") {
-                    _,_ -> sendMessage()
-            }
-            .show()
-    }
-
-    private fun  sendMessage() {
-        val titleEditText = view?.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.titleEditText)
-        val newMessageEditText = view?.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.newMessageEditText)
-
-        viewModel.sendMessage(titleEditText.toString(), newMessageEditText.toString())
-//        navigateBack()
-
     }
 
 }
