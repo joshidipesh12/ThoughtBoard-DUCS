@@ -38,12 +38,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="@string/department_of_computer_science_university_of_delhi"
         android:gravity="center"
+        android:text="@string/department_of_computer_science_university_of_delhi"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signin_btn"
@@ -69,15 +70,31 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="275dp"
-        android:layout_height="92dp"
+        android:layout_width="259dp"
+        android:layout_height="45dp"
         android:contentDescription="@string/gdsc_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin_btn"
-        app:layout_constraintVertical_bias="0.529"
+        app:layout_constraintVertical_bias="0.425"
         app:srcCompat="@drawable/gdsc_logo" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/google_developer_student_club"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

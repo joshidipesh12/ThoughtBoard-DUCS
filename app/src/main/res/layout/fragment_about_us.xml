@@ -54,13 +54,13 @@
 
             <ImageView
                 android:id="@+id/app_logo"
-                android:layout_width="140dp"
-                android:layout_height="149dp"
+                android:layout_width="70dp"
+                android:layout_height="56dp"
                 android:layout_marginStart="35dp"
-                android:layout_marginTop="170dp"
+                android:layout_marginTop="144dp"
                 android:contentDescription="@string/todo"
-                app:layout_constraintEnd_toStartOf="@+id/heart"
-                app:layout_constraintHorizontal_bias="0.62"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.443"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/app_logo"
@@ -70,7 +70,7 @@
                 android:id="@+id/heart"
                 android:layout_width="35dp"
                 android:layout_height="32dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="90dp"
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,23 +81,36 @@
                 app:srcCompat="@drawable/heart_vector" />
 
             <ImageView
-                android:id="@+id/ducs_logo"
-                android:layout_width="113dp"
-                android:layout_height="89dp"
-                android:layout_marginTop="200dp"
+                android:id="@+id/gdsc_logo"
+                android:layout_width="96dp"
+                android:layout_height="73dp"
+                android:layout_marginTop="208dp"
                 android:layout_marginEnd="35dp"
                 android:contentDescription="@string/todo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.447"
+                app:layout_constraintHorizontal_bias="0.431"
                 app:layout_constraintStart_toEndOf="@+id/heart"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gdsc_logo" />
+
+            <ImageView
+                android:id="@+id/ducs_logo"
+                android:layout_width="111dp"
+                android:layout_height="93dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="200dp"
+                android:contentDescription="@string/todo"
+                app:layout_constraintEnd_toStartOf="@id/heart"
+                app:layout_constraintHorizontal_bias="0.59"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ducs_logo" />
 
             <TextView
                 android:id="@+id/department_subheading2"
                 android:layout_width="190dp"
                 android:layout_height="54dp"
-                android:layout_marginTop="210dp"
+                android:layout_marginTop="220dp"
                 android:text="@string/made_with_love_by_ducs_developers"
                 android:textAlignment="center"
                 android:textColor="#504F4F"

@@ -35,4 +35,5 @@
     <string name="with_ducs_domain_email">With DUCS Domain Email</string>
     <string name="gdsc_logo">gdsc_logo</string>
     <string name="confirm_send_dialog_msg">"Are you sure you want to send the message ?"</string>
+    <string name="google_developer_student_club">Google Developer Student Club</string>
 </resources>
