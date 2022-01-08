@@ -23,20 +23,24 @@ This project proposes an Open-Chat Android Application for intradepartmental com
 <b> Functionality & Concepts used : </b>
 
 - The App has a very simple and interactive interface which allows the students to send and read messages (with a title) authenticated by their Departmental Domain Emails. Following are few android concepts used to achieve the functionalities in app : 
-- Constraint and Linear Layout : Most of the activities in the app uses a flexible constraint layout, which is easy to handle for different screen sizes. Some activities also use a linear layout for better presentation.
-- Simple & Easy Views Design : Use of familiar audience EditText with hints and interactive buttons made it easier for students to sign in and send messages without providing any detailed instructions pages. Apps also uses App Navigation to switch between different screens.
-- RecyclerView : To present the list of messages, we used the efficient recyclerview.
-- Room Database : The user signup details, including, username and email are saved using Room Database. Also we are planning to save favourite messages locally in Room Database, in the future releases.
+- Constraint and Linear Layout : Most of the fragments in the app uses a flexible constraint layout, which names is easy to handle scaling for different screen sizes. Some fragment(s) also use a linear layout for better presentation.
+- Simple & Easy Views Design :  Use of Interactive buttons, eye pleasing Color scheme and simpler UI, made it easier for students to sign in and send messages without providing any detailed instructions pages. The also uses basic android App Navigation library & supportActionBars to switch between different screens (fragments).
+- RecyclerView : To present the list of messages, we have used the efficient RecyclerView.
+- Room Database : The user signup details, including username and email are saved using Room Database. Also we are planning to save favourite messages locally in Room Database, in the future releases.
 - Firebase Realtime DB : For serving data to the application and provide a better performance and offline caching. We are using the Spark Plan of firebase with 1Gb storage and 10Gb data transfer that is planned to be upgraded in future depending on the usage & audience's response on the applications.
 - LiveData : We are also using LiveData to update & observe any changes in the Date Picker and Messages(Posts) Array from firebase realtime database.
 - Viewmodel : We have implemented a Viewmodel setup for handing the data and api requests for the the NewMessage screen.
 
 <b> Application Link & Future Scope : </b>
 
-The app is currently in the Alpha testing phase with 2021-22 batch students of Department of Computer Science, University of Delhi, You can access the app here : [APP LINK HERE]().
+The app is currently in the Alpha testing phase with 2021-22 batch students of Department of Computer Science, University of Delhi, You can access the app here : [APP LINK HERE](cs.du.ac.in).
 
 Once the app is fully tested during the Sankalan'21 event (the annual departmental fest event), we plan to make it the primary mode of communication and resource sharing with the addition of features like:
  - support for sharing docs and links
  - grouping messages by themes/hashtags/events
  - feature for saving favourite messages locally or on cloud
  - external sharing of messages on social media and other chatting applications
+
+<b> Note </b>
+
+- Hidden Keys  : The API keys and Client IDs are hidden from the repo code using BuildConfigs. For compiling the project with the `secrets.properties` or using the app outside Department of Computer Science Workspace Domain, please contact the repo maintainer.
