@@ -16,7 +16,7 @@ data class Post(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 
-    @ColumnInfo(name = "email")
+    @ColumnInfo(name = "email", index = true)
     val userEmail: String,
 
     @ColumnInfo(name = "creation_date")

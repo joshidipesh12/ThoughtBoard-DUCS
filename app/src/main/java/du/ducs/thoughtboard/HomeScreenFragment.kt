@@ -8,65 +8,84 @@ import android.widget.DatePicker
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import du.ducs.thoughtboard.adapter.ItemAdapter
-import du.ducs.thoughtboard.data.DummyDataSource
+import du.ducs.thoughtboard.adapter.MessageTileAdapter
 import java.text.SimpleDateFormat
 import java.util.*
-
+import du.ducs.thoughtboard.databinding.FragmentHomeScreenBinding
+import kotlinx.datetime.LocalDateTime
 
 class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
     DatePickerDialog.OnDateSetListener, RecyclerView.OnItemTouchListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    // The view binding to access views.
+    private var _binding: FragmentHomeScreenBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: MessageViewModel by viewModels()
+    private lateinit var adapter: MessageTileAdapter
+
+    // Date formatter for the action bar title.
+    private val formatter = SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.ENGLISH)
+
+    // The calendar instance maintaining the current selected date.
+    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_screen, container, false)
+        _binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
 
-        //This is just for now when we will work with data we'll set it to last date of data
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-
-        sdf.applyPattern("EEEE, dd MMM yyyy")
-        val sMyDate: String = sdf.format(Calendar.getInstance().time)
+        val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
 
-        //TODO(Use ViewModel Data Here)
-        val myDataset = DummyDataSource().loadDummyMessages()
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+        val recyclerView = binding.recyclerView
         recyclerView.layoutManager = object : GridLayoutManager((activity as AppCompatActivity?)!!, 2){
             override fun checkLayoutParams(lp: RecyclerView.LayoutParams) : Boolean {
                 lp.height = (view.width / 2.3).toInt()
                 return true
             }
         }
-        recyclerView.adapter = ItemAdapter(this, myDataset)
+
+        adapter = MessageTileAdapter()
+        viewModel.messages.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
+        recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
 
-        //To Navigate from HomeScreen Fragment to About Us Fragment
-        view.findViewById<Button>(R.id.about_button).setOnClickListener {
-            findNavController().navigate(R.id.action_homeScreenFragment_to_aboutUsFragment)
+        binding.newMsgButton.setOnClickListener {
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToNewMessageFragment()
+            findNavController().navigate(action)
         }
-        //To Navigate from HomeScreen Fragment to NewMessageScreen Fragment
-        view.findViewById<Button>(R.id.new_msg_button).setOnClickListener {
-           findNavController().navigate(R.id.action_homeScreenFragment_to_newMessageFragment)
+
+        binding.aboutButton.setOnClickListener {
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToAboutUsFragment()
+            findNavController().navigate(action)
         }
+
+        // Pass the date to the view model to initiate a load request
+        viewModel.setDateFilter(LocalDateTime(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH) + 1,
+            calendar.get(Calendar.DAY_OF_MONTH),
+            0, 0, 0,
+        ))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -81,36 +100,31 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
 
     private fun showDatePickerDialog()  {
         val datePickerDialog = DatePickerDialog(
-            (activity as AppCompatActivity?)!!,
-            this,
-            Calendar.getInstance().get(Calendar.YEAR),
-            Calendar.getInstance().get(Calendar.MONTH),
-            Calendar.getInstance().get(Calendar.DAY_OF_MONTH) )
+            activity!!, this,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
 
         datePickerDialog.show()
     }
 
     override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val calendar = Calendar.getInstance()
-        calendar.set(year,monthOfYear,dayOfMonth)
+        calendar.set(year, monthOfYear, dayOfMonth)
 
-        val sdf = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.ENGLISH)
-        val sMyDate: String = sdf.format(calendar.time)
-
+        val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        calendar.set(year, month, dayOfMonth)
 
-
-        val calendar = Calendar.getInstance()
-        calendar.set(year,month,dayOfMonth)
-
-        val sdf = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.ENGLISH)
-        val sMyDate: String = sdf.format(calendar.time)
-
+        val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
 
+        viewModel.setDateFilter(
+            LocalDateTime( year, month + 1, dayOfMonth, 0, 0, 0 )
+        )
     }
 
     override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {

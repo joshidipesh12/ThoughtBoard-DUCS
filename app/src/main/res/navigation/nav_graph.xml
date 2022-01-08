@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeSignInFragment">
-
     <fragment
         android:id="@+id/aboutUsFragment"
         android:name="du.ducs.thoughtboard.AboutUsFragment"
