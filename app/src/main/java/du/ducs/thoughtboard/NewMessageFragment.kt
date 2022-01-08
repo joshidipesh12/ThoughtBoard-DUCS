@@ -61,10 +61,11 @@ class NewMessageFragment : Fragment() {
                         .setTitle(R.string.confirm_send_dialog_msg)
                         .setCancelable(true)
                         .setPositiveButton("Yes") {
-                                _, _ -> { 
-                                  viewModel.sendMessage(title, message)
-                                  navigateBack()
-                                }
+                                _, _ ->
+                            run {
+                                viewModel.sendMessage(title, message)
+                                navigateBack()
+                            }
                         }
                         .show()
                 }

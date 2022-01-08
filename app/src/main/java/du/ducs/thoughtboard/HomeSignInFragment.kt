@@ -27,7 +27,7 @@ class HomeSignInFragment : Fragment() {
     private var oneTapClient: SignInClient? = null
     private var signUpRequest: BeginSignInRequest? = null
     private var signInRequest: BeginSignInRequest? = null
-    private val webClientId: String = BuildConfig.FIREBASE_GOOGLE_AUTH_CLIENT_ID
+    private val webClientId: String = BuildConfig.ONE_TAP_WEB_CLIENT_ID
 
     private val oneTapResult =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
