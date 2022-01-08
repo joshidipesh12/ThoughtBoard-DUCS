@@ -3,9 +3,12 @@ package du.ducs.thoughtboard
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.DatePicker
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import du.ducs.thoughtboard.adapter.ItemAdapter
@@ -56,6 +59,14 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         recyclerView.adapter = ItemAdapter(this, myDataset)
         recyclerView.setHasFixedSize(true)
 
+        //To Navigate from HomeScreen Fragment to About Us Fragment
+        view.findViewById<Button>(R.id.about_button).setOnClickListener {
+            findNavController().navigate(R.id.action_homeScreenFragment_to_aboutUsFragment)
+        }
+        //To Navigate from HomeScreen Fragment to NewMessageScreen Fragment
+        view.findViewById<Button>(R.id.new_msg_button).setOnClickListener {
+           findNavController().navigate(R.id.action_homeScreenFragment_to_newMessageFragment)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NewMessageFragment : Fragment() {
@@ -48,7 +49,7 @@ class NewMessageFragment : Fragment() {
         when(item.itemId) {
             //onClick for back
             android.R.id.home ->{
-//                navigateBack()
+                navigateBack()
             }
 
             //onClick for send
@@ -80,8 +81,10 @@ class NewMessageFragment : Fragment() {
         val newMessageEditText = view?.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.newMessageEditText)
 
         viewModel.sendMessage(titleEditText.toString(), newMessageEditText.toString())
-//        navigateBack()
+       navigateBack()
 
     }
-
+private fun navigateBack(){
+    findNavController().navigate(R.id.action_newMessageFragment_to_homeScreenFragment)
+}
 }
