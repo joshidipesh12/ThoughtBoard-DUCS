@@ -4,47 +4,37 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import du.ducs.thoughtboard.model.Message
 import kotlinx.datetime.*
-import kotlin.collections.HashMap
 
 const val TAG = "MessageViewModel"
 const val COLLECTION = "messages"
 
-data class Message(
-    var id: String? = null,
-    var title: String? = null,
-    var message: String? = null,
-    var timestamp: Long = Timestamp.now().nanoseconds.toLong(),
-    var userId: String? = null,
-    var emailId: String? = null
-) {
-    // Create hashMap of data with id removed
-    // id is not to be stored in document
-    fun toHashMap(): HashMap<String, Any> {
-        return hashMapOf(
-            "title" to (title ?: ""),
-            "message" to (message ?: ""),
-            "timestamp" to timestamp,
-            "userId" to (userId ?: ""),
-            "emailId" to (emailId ?: "")
-        )
-    }
-}
-
 class MessageViewModel : ViewModel() {
-
+    private val user = Firebase.auth.currentUser
     private val db = Firebase.firestore
+
+    // Instance of the current logged-in user, if any.
+    val currentUser: FirebaseUser?
+        get() = user
 
     private val _messages = MutableLiveData<List<Message>>()
     // observe this variable to get new message updates
     val messages: LiveData<List<Message>>
         get() = _messages
 
-    fun sendMessage(msg: Message) {
+    fun sendMessage(title: String, message: String) {
+        // Create message object from user information and provided values.
+        val msg = Message(
+            title = title, message = message,
+            userId = user?.displayName, emailId = user?.email
+        )
+
         db.collection(COLLECTION)
             .add(msg.toHashMap())
             .addOnSuccessListener { documentReference ->
@@ -60,7 +50,7 @@ class MessageViewModel : ViewModel() {
     }
 
     // datetime object should have the hours, minutes, seconds set to zero
-    fun setDateFiler(dateTime: LocalDateTime) {
+    fun setDateFilter(dateTime: LocalDateTime) {
         db.collection(COLLECTION)
             .whereGreaterThan("timestamp", getDayOneTimeStamp(dateTime))
             .whereLessThan("timestamp", getDayTwoTimeStamp(dateTime))
