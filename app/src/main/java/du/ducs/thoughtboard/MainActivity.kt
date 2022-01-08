@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
 
         setContentView(R.layout.activity_main)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController= navHostFragment.navController
+        //This ensures action bar (app bar) buttons
+        setupActionBarWithNavController(navController)
 
         val user = viewModel.currentUser
         Log.d(TAG, "Auth user email: ${user?.email}")
@@ -35,6 +39,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,FirebaseLoginActivity::class.java))
             finish()
         }
+    }
+    //To handle the working of Up Buttons
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun onSupportNavigateUp(): Boolean {

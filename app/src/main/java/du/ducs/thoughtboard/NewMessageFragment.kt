@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import du.ducs.thoughtboard.databinding.FragmentNewMessageBinding
@@ -47,7 +48,7 @@ class NewMessageFragment : Fragment() {
         when(item.itemId) {
             //onClick for back
             android.R.id.home ->{
-//                navigateBack()
+                navigateBack()
             }
 
             //onClick for send
@@ -60,7 +61,10 @@ class NewMessageFragment : Fragment() {
                         .setTitle(R.string.confirm_send_dialog_msg)
                         .setCancelable(true)
                         .setPositiveButton("Yes") {
-                                _, _ -> viewModel.sendMessage(title, message)
+                                _, _ -> { 
+                                  viewModel.sendMessage(title, message)
+                                  navigateBack()
+                                }
                         }
                         .show()
                 }
@@ -69,4 +73,7 @@ class NewMessageFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun navigateBack(){
+        findNavController().navigate(R.id.action_newMessageFragment_to_homeScreenFragment)
+    }
 }
