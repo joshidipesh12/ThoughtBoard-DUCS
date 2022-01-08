@@ -34,4 +34,5 @@
     <string name="department_of_computer_science_university_of_delhi">Department of Computer Science\n University of Delhi</string>
     <string name="with_ducs_domain_email">With DUCS Domain Email</string>
     <string name="gdsc_logo">gdsc_logo</string>
+    <string name="confirm_send_dialog_msg">"Are you sure you want to send the message ?"</string>
 </resources>
