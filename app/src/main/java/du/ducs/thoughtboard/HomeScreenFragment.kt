@@ -7,15 +7,21 @@ import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import du.ducs.thoughtboard.adapter.MessageTileAdapter
 import java.text.SimpleDateFormat
 import java.util.*
-
+import du.ducs.thoughtboard.databinding.FragmentHomeScreenBinding
+import kotlinx.datetime.LocalDateTime
 
 class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
     DatePickerDialog.OnDateSetListener, RecyclerView.OnItemTouchListener {
+
+    // The view binding to access views.
+    private var _binding: FragmentHomeScreenBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: MessageViewModel by viewModels()
     private lateinit var adapter: MessageTileAdapter
@@ -29,22 +35,23 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_screen, container, false)
+        _binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
 
         val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+        val recyclerView = binding.recyclerView
         recyclerView.layoutManager = object : GridLayoutManager((activity as AppCompatActivity?)!!, 2){
             override fun checkLayoutParams(lp: RecyclerView.LayoutParams) : Boolean {
                 lp.height = (view.width / 2.3).toInt()
@@ -59,6 +66,24 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
 
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+
+        binding.newMsgButton.setOnClickListener {
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToNewMessageFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.aboutButton.setOnClickListener {
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToAboutUsFragment()
+            findNavController().navigate(action)
+        }
+
+        // Pass the date to the view model to initiate a load request
+        viewModel.setDateFilter(LocalDateTime(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH) + 1,
+            calendar.get(Calendar.DAY_OF_MONTH),
+            0, 0, 0,
+        ))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -94,6 +119,10 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
 
         val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
+
+        viewModel.setDateFilter(
+            LocalDateTime( year, month + 1, dayOfMonth, 0, 0, 0 )
+        )
     }
 
     override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
