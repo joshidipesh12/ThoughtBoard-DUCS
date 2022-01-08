@@ -15,7 +15,7 @@ object AuthDecoder {
             val name = jsonObj.getString("name")
             val email = jsonObj.getString("email")
             Log.d("JWT_DECODER", "Name: $name, Email: $email")
-            return email.contains("@cs.du.ac.in") && name.isNotEmpty()
+            return email.endsWith("@cs.du.ac.in") && name.isNotEmpty()
         } catch (e: UnsupportedEncodingException) {
             //Error
         }
