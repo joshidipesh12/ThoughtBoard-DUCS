@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         //     // FIXME: Decide how to setup navController with the activity's non-existent action bar.
         if (actionBar!=null) {
-
             setupActionBarWithNavController(navController)
         }
         val auth = Firebase.auth
@@ -52,14 +51,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     //To handle the working of Up Buttons
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onContextItemSelected(item)
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     companion object {

@@ -35,11 +35,6 @@
         android:name="du.ducs.thoughtboard.NewMessageFragment"
         android:label="fragment_new_message"
         tools:layout="@layout/fragment_new_message" >
-        <action
-            android:id="@+id/action_newMessageFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/messageScreenFragment"

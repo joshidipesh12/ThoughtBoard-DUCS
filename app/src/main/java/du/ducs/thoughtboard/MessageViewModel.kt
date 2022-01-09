@@ -6,14 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import du.ducs.thoughtboard.model.Message
 import java.util.*
-
-const val TAG = "MessageViewModel"
-const val COLLECTION = "messages"
 
 class MessageViewModel : ViewModel() {
     private val user = Firebase.auth.currentUser
@@ -54,6 +52,7 @@ class MessageViewModel : ViewModel() {
         db.collection(COLLECTION)
             .whereGreaterThan("timestamp", getDayOneTimeStamp(calendar))
             .whereLessThan("timestamp", getDayTwoTimeStamp(calendar))
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.d(TAG, "listen failed", e)
@@ -74,14 +73,20 @@ class MessageViewModel : ViewModel() {
     }
 
     private fun getDayTwoTimeStamp(calendar: Calendar): Long {
-        calendar.add(Calendar.DATE,1)
-        Log.d(TAG, "Time 2: ${calendar.timeInMillis}")
-        return calendar.timeInMillis
+        val newCalendar = calendar.clone() as Calendar
+        newCalendar.add(Calendar.DATE,1)
+        Log.d(TAG, "Time 2: ${newCalendar.timeInMillis}")
+        return newCalendar.timeInMillis
     }
 
     private fun getDayOneTimeStamp(calendar: Calendar): Long {
         Log.d(TAG, "Time 1: ${calendar.timeInMillis}")
         return calendar.timeInMillis
+    }
+
+    companion object {
+        const val TAG = "MessageViewModel"
+        const val COLLECTION = "messages"
     }
 
 }

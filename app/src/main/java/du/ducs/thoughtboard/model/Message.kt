@@ -1,12 +1,13 @@
 package du.ducs.thoughtboard.model
 
-import com.google.firebase.Timestamp
+import java.util.*
+import kotlin.collections.HashMap
 
 data class Message(
     var id: String? = null,
     var title: String? = null,
     var message: String? = null,
-    var timestamp: Long = Timestamp.now().nanoseconds.toLong(),
+    var timestamp: Long = Calendar.getInstance().timeInMillis,
     var userId: String? = null,
     var emailId: String? = null
 ) {
