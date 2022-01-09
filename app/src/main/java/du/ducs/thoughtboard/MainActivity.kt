@@ -3,11 +3,12 @@ package du.ducs.thoughtboard
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -20,9 +21,11 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
 
         setContentView(R.layout.activity_main)
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
 
         // TODO: Switch to using room stored user
         // val user = viewModel.currentUser
@@ -34,8 +37,10 @@ class MainActivity : AppCompatActivity() {
         //     navController = navHostFragment.navController
 
         //     // FIXME: Decide how to setup navController with the activity's non-existent action bar.
-        //     // setupActionBarWithNavController(navController)
+        if (actionBar!=null) {
 
+            setupActionBarWithNavController(navController)
+        }
         val auth = Firebase.auth
         Log.d(TAG, "Auth user email: ${auth.currentUser?.email}")
         if (auth.currentUser != null) {
@@ -47,8 +52,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //To handle the working of Up Buttons
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onContextItemSelected(item)
     }
 
     companion object {
