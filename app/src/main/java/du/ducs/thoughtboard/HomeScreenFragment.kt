@@ -3,9 +3,7 @@ package du.ducs.thoughtboard
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import android.widget.DatePicker
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -61,8 +59,11 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
             }
         }
 
+        binding.noMessageView.visibility = View.VISIBLE
+
         adapter = MessageTileAdapter()
         viewModel.messages.observe(viewLifecycleOwner) {
+            binding.noMessageView.visibility = if(it.isEmpty()) View.VISIBLE else View.GONE
             adapter.submitList(it)
         }
 
