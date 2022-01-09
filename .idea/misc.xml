@@ -5,7 +5,8 @@
       <map>
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/activity_home_signin.xml" value="0.33" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/fragment_home_screen.xml" value="0.13802083333333334" />
+        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/fragment_home_screen.xml" value="0.18397291196388263" />
+        <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/fragment_home_signin.xml" value="0.5" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/fragment_loading_screen.xml" value="0.2" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/fragment_new_message.xml" value="0.2" />
         <entry key="..\:/AllWorkspaces/Learning/Android/ThoughtBoard-DUCS/app/src/main/res/layout/message_tile.xml" value="0.13802083333333334" />

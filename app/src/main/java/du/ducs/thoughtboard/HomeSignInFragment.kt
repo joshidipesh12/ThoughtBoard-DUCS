@@ -1,5 +1,6 @@
 package du.ducs.thoughtboard
 
+import android.annotation.SuppressLint
 import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import android.widget.TextView
+
+
+
 
 class HomeSignInFragment : Fragment() {
 
@@ -127,8 +132,10 @@ class HomeSignInFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home_signin, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         oneTapClient = activity?.let { Identity.getSignInClient(it) }
         signUpRequest = BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
@@ -156,7 +163,14 @@ class HomeSignInFragment : Fragment() {
             .build()
 
         val signInBtn: SignInButton? = activity?.findViewById(R.id.signin_btn)
-        signInBtn?.setOnClickListener { displaySignIn() }
+        // setting signin button text
+        for (i in 0 until signInBtn?.childCount!!) {
+            val v: View = signInBtn.getChildAt(i)
+            if (v is TextView) {
+                v.text = "SIGN IN WITH GOOGLE  "
+            }
+        }
+        signInBtn.setOnClickListener { displaySignIn() }
     }
 
     private fun displaySignIn() {
