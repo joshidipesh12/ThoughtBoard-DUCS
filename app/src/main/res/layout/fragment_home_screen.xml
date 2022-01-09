@@ -59,41 +59,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ImageContrastCheck" />
 
-    <ImageView
-        android:id="@+id/no_message_image"
-        android:layout_width="260dp"
-        android:layout_height="236dp"
-        android:layout_marginTop="124dp"
-        android:contentDescription="@string/todo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:srcCompat="@drawable/no_message_image"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/no_message_text_1"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/no_message_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_messages_found"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_message_image"
-        app:layout_constraintVertical_bias="0.084"
-        android:visibility="gone"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible">
+        <ImageView
+            android:id="@+id/no_message_image"
+            android:layout_width="260dp"
+            android:layout_height="236dp"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/no_message_image"/>
 
-    <TextView
-        android:id="@+id/no_message_text_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tap_the_icon_to_create_one"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_message_text_1"
-        app:layout_constraintVertical_bias="0.027"
-        android:visibility="gone"/>
+        <TextView
+            android:id="@+id/no_message_text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/no_messages_found"
+            app:layout_constraintTop_toBottomOf="@+id/no_message_image"/>
+
+        <TextView
+            android:id="@+id/no_message_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/tap_the_icon_to_create_one"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
