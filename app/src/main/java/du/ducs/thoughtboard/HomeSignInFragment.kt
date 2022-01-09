@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -42,6 +43,11 @@ class HomeSignInFragment : Fragment() {
 
                         // Verify token and check if domain is @cs.du.ac.in
                         if (AuthDecoder.decoded(idToken)) {
+                            Toast.makeText(
+                                activity,
+                                "Welcome To DUCS",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             // send Token to firebase and complete signIn
                             firebaseAuthWithGoogle(idToken)
                         } else {
@@ -58,6 +64,11 @@ class HomeSignInFragment : Fragment() {
                     else -> {
                         // Shouldn't happen.
                         Log.d(TAG, "No ID token!")
+                        Toast.makeText(
+                            activity,
+                            "ID Token Error!!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             } catch (e: ApiException) {
@@ -69,12 +80,22 @@ class HomeSignInFragment : Fragment() {
                     CommonStatusCodes.NETWORK_ERROR -> {
                         Log.d(TAG, "One-tap encountered a network error.")
                         // Try again or just ignore.
+                        Toast.makeText(
+                            activity,
+                            "Encountered a Network Error.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     else -> {
                         Log.d(
                             TAG, "Couldn't get credential from result." +
                                     " (${e.localizedMessage})"
                         )
+                        Toast.makeText(
+                            activity,
+                            "Couldn't get credentials.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -85,6 +106,11 @@ class HomeSignInFragment : Fragment() {
             oneTapClient?.signOut()
                 ?.addOnCompleteListener(it) {
                     Log.d(TAG, "User logged out")
+                    Toast.makeText(
+                        activity,
+                        "Logged Out!!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         }
     }
@@ -114,6 +140,7 @@ class HomeSignInFragment : Fragment() {
                     .setFilterByAuthorizedAccounts(false)
                     .build()
             )
+            .setAutoSelectEnabled(false)
             .build()
         signInRequest = BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
@@ -122,9 +149,10 @@ class HomeSignInFragment : Fragment() {
                     // Your server's client ID, not your Android client ID.
                     .setServerClientId(webClientId)
                     // Show all accounts on the device.
-                    .setFilterByAuthorizedAccounts(true)
+                    .setFilterByAuthorizedAccounts(false)
                     .build()
             )
+            .setAutoSelectEnabled(false)
             .build()
 
         val signInBtn: SignInButton? = activity?.findViewById(R.id.signin_btn)
@@ -141,12 +169,51 @@ class HomeSignInFragment : Fragment() {
                         oneTapResult.launch(ib)
                     } catch (e: IntentSender.SendIntentException) {
                         Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
+                        Toast.makeText(
+                            activity,
+                            "Couldn't start One Tap UI.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
                 ?.addOnFailureListener(it) { e ->
                     // No Google Accounts found. Just continue presenting the signed-out UI.
-//                    displaySignUp()
                     Log.d(TAG, e.localizedMessage!!)
+                    val snack = Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        "No Valid DUCS Email Found", Snackbar.LENGTH_LONG)
+                    snack.setAction("SignUp") {
+                        displaySignUp()
+                    }
+                    snack.show()
+                }
+        }
+    }
+
+    private fun displaySignUp() {
+        activity?.let{
+            oneTapClient?.beginSignIn(signUpRequest!!)
+                ?.addOnSuccessListener(it) { result ->
+                    try {
+                        val ib = IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
+                        oneTapResult.launch(ib)
+                    } catch (e: IntentSender.SendIntentException) {
+                        Log.e("btn click", "Couldn't start One Tap UI: ${e.localizedMessage}")
+                        Toast.makeText(
+                            activity,
+                            "Couldn't start One Tap UI.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                ?.addOnFailureListener(it) { e ->
+                    // No Google Accounts found. Just continue presenting the signed-out UI.
+                    Toast.makeText(
+                        activity,
+                        "Failed To Sign Up!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.d("btn click", e.localizedMessage!!)
                 }
         }
     }
@@ -174,6 +241,12 @@ class HomeSignInFragment : Fragment() {
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             findNavController().navigate(R.id.action_homeSignInFragment_to_homeScreenFragment)
+        } else {
+            Toast.makeText(
+                activity,
+                "Sign In Failed!!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

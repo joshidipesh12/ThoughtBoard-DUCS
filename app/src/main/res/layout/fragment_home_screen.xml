@@ -19,7 +19,9 @@
         app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/message_tile"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"/>
+        app:spanCount="2"
+        android:padding="10dp"
+        android:scrollbarSize="0dp"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -30,6 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:elevation="12dp"
         app:titleTextColor="@color/design_default_color_on_primary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

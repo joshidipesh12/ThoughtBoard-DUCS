@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    tools:context=".NewMessageFragment"
     android:orientation="vertical"
-    tools:context=".NewMessageFragment">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -17,6 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:elevation="12dp"
         app:titleTextColor="@color/design_default_color_on_primary">
 
     </androidx.appcompat.widget.Toolbar>
@@ -37,7 +41,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEditText"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
             tools:ignore="TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -46,26 +51,28 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newMessage"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:hintTextColor="@color/light_blue"
-        app:boxStrokeColor="@color/light_blue"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="584dp"
+        android:background="@drawable/ic_drawable_new_message_bg"
         android:hint="@string/message"
         android:paddingStart="30dp"
         android:paddingTop="16dp"
         android:paddingEnd="30dp"
         android:paddingBottom="16dp"
-        android:background="@drawable/ic_drawable_new_message_bg"
         app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/light_blue"
+        app:hintTextColor="@color/light_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newMessageEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="top|start"
+            android:inputType="textCapSentences|textMultiLine"
             android:isScrollContainer="false"
+            android:maxHeight="500dp"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbarStyle="insideInset"
             android:scrollbarThumbVertical="@drawable/ic_drawable_scroll_indicator"

@@ -7,7 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import du.ducs.thoughtboard.databinding.FragmentNewMessageBinding
+import androidx.core.content.ContextCompat.getSystemService
+
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
+
 
 class NewMessageFragment : Fragment() {
     // The view binding to access views.
@@ -53,6 +59,8 @@ class NewMessageFragment : Fragment() {
 
             //onClick for send
             R.id.send -> {
+                binding.titleEditText.clearFocus()
+                binding.newMessageEditText.clearFocus()
                 val title   = binding.titleEditText.text.toString()
                 val message = binding.newMessageEditText.text.toString()
 
@@ -68,6 +76,12 @@ class NewMessageFragment : Fragment() {
                             }
                         }
                         .show()
+                } else {
+                    Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        "Title & Message Can't Be Empty!!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

@@ -15,6 +15,7 @@
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:elevation="12dp"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
