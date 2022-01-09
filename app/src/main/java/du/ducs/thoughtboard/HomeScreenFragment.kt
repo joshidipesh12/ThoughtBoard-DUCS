@@ -2,6 +2,7 @@ package du.ducs.thoughtboard
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +15,6 @@ import du.ducs.thoughtboard.adapter.MessageTileAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 import du.ducs.thoughtboard.databinding.FragmentHomeScreenBinding
-import kotlinx.datetime.LocalDateTime
 
 class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
     DatePickerDialog.OnDateSetListener, RecyclerView.OnItemTouchListener {
@@ -52,18 +52,19 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
 
         val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = object : GridLayoutManager((activity as AppCompatActivity?)!!, 2){
-            override fun checkLayoutParams(lp: RecyclerView.LayoutParams) : Boolean {
-                lp.height = (view.width / 2.3).toInt()
-                return true
+        recyclerView.layoutManager =
+            object : GridLayoutManager((activity as AppCompatActivity?)!!, 2) {
+                override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
+                    lp.height = (view.width / 2.3).toInt()
+                    return true
+                }
             }
-        }
 
         binding.noMessageView.visibility = View.VISIBLE
 
         adapter = MessageTileAdapter()
         viewModel.messages.observe(viewLifecycleOwner) {
-            binding.noMessageView.visibility = if(it.isEmpty()) View.VISIBLE else View.GONE
+            binding.noMessageView.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             adapter.submitList(it)
         }
 
@@ -80,18 +81,21 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
             findNavController().navigate(action)
         }
 
-        // Pass the date to the view model to initiate a load request
-        viewModel.setDateFilter(LocalDateTime(
+        calendar.set(
             calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH) + 1,
+            calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH),
             0, 0, 0,
-        ))
+        )
+        Log.d(TAG, "Got time: ${calendar.timeInMillis}")
+
+        // Pass the date to the view model to initiate a load request
+        viewModel.setDateFilter(calendar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_home_screen_menu, menu)
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -99,7 +103,7 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         return super.onOptionsItemSelected(item)
     }
 
-    private fun showDatePickerDialog()  {
+    private fun showDatePickerDialog() {
         val datePickerDialog = DatePickerDialog(
             activity!!, this,
             calendar.get(Calendar.YEAR),
@@ -123,9 +127,7 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         val sMyDate = formatter.format(calendar.time)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
 
-        viewModel.setDateFilter(
-            LocalDateTime( year, month + 1, dayOfMonth, 0, 0, 0 )
-        )
+        viewModel.setDateFilter(calendar)
     }
 
     override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
