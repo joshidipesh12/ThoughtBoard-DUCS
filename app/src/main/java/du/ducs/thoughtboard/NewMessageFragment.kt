@@ -52,11 +52,6 @@ class NewMessageFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            //onClick for back
-            android.R.id.home ->{
-                navigateBack()
-            }
-
             //onClick for send
             R.id.send -> {
                 binding.titleEditText.clearFocus()
@@ -72,7 +67,7 @@ class NewMessageFragment : Fragment() {
                                 _, _ ->
                             run {
                                 viewModel.sendMessage(title, message)
-                                navigateBack()
+                                findNavController().navigateUp()
                             }
                         }
                         .show()
@@ -88,7 +83,4 @@ class NewMessageFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun navigateBack(){
-        findNavController().navigate(R.id.action_newMessageFragment_to_homeScreenFragment)
-    }
 }

@@ -144,4 +144,8 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         // try avoiding this implementation
     }
 
+    companion object {
+        const val TAG = "HomeScreenFragment"
+    }
+
 }
