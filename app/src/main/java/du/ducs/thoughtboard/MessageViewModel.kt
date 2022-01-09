@@ -10,7 +10,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import du.ducs.thoughtboard.model.Message
-import kotlinx.datetime.*
+import java.util.*
 
 const val TAG = "MessageViewModel"
 const val COLLECTION = "messages"
@@ -50,10 +50,10 @@ class MessageViewModel : ViewModel() {
     }
 
     // datetime object should have the hours, minutes, seconds set to zero
-    fun setDateFilter(dateTime: LocalDateTime) {
+    fun setDateFilter(calendar: Calendar) {
         db.collection(COLLECTION)
-            .whereGreaterThan("timestamp", getDayOneTimeStamp(dateTime))
-            .whereLessThan("timestamp", getDayTwoTimeStamp(dateTime))
+            .whereGreaterThan("timestamp", getDayOneTimeStamp(calendar))
+            .whereLessThan("timestamp", getDayTwoTimeStamp(calendar))
             .addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.d(TAG, "listen failed", e)
@@ -73,18 +73,15 @@ class MessageViewModel : ViewModel() {
             }
     }
 
-    private fun getDayTwoTimeStamp(dateTime: LocalDateTime): Long {
-        val timeInstant = dateTime.toInstant(TimeZone.currentSystemDefault())
-        val timeInstantOneDayLater =
-            timeInstant.plus(1, DateTimeUnit.DAY, TimeZone.currentSystemDefault())
-        Log.d(TAG, "Time 2: ${timeInstantOneDayLater.epochSeconds}")
-        return timeInstantOneDayLater.epochSeconds
+    private fun getDayTwoTimeStamp(calendar: Calendar): Long {
+        calendar.add(Calendar.DATE,1)
+        Log.d(TAG, "Time 2: ${calendar.timeInMillis}")
+        return calendar.timeInMillis
     }
 
-    private fun getDayOneTimeStamp(dateTime: LocalDateTime): Long {
-        val timeInstant = dateTime.toInstant(TimeZone.currentSystemDefault())
-        Log.d(TAG, "Time 1: ${timeInstant.epochSeconds}")
-        return timeInstant.epochSeconds
+    private fun getDayOneTimeStamp(calendar: Calendar): Long {
+        Log.d(TAG, "Time 1: ${calendar.timeInMillis}")
+        return calendar.timeInMillis
     }
 
 }
