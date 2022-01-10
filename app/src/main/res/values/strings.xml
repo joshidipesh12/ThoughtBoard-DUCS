@@ -17,10 +17,6 @@
         Undergraduate CBCS programmes - B.Sc. (H) Computer Science, B.Sc. Physical / Mathematical Sciences and B.A. Programme (Discipline Courses in Computer Applications) are offered by the University of Delhi through its constituent colleges.\n
         With rapidly evolving technology and the continuous need for innovation, the Department has produced quality professionals holding important positions in the IT industry in India and abroad.
     </string>
-    <string name="dummy_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque sed egestas aliquam</string>
-    <string name="dummy_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porta quis mauris metus, vel ut amet sed nunc. Facilisis est sit volutpat hac platea purus elementum, id. Aliquam morbi lobortis augue viverra. Eget velit venenatis tortor purus rhoncus metus.Eu suspendisse libero potenti nunc aliquam. Ac fermentum et viverra tellus risus, nunc. Ultrices sed venenatis eget dui mauris nulla quis fermentum. Mattis ac arcu tristique praesent cum feugiat gravida et ut. Egestas ullamcorper mauris fringilla et interdum feugiat pretium erat volutpat. Tristique purus morbi non pharetra orci. Vitae, risus mauris pretium tortor in consectetur. Tellus sem lectus dui orci facilisis amet.</string>
-    <string name="dummy_author">Rishi Sharma</string>
-    <string name="dummy_email">rishi.sharma@gmail.com</string>
     <string name="title">Title</string>
     <string name="message">Message</string>
     <string name="back">Back</string>
@@ -37,4 +33,6 @@
     <string name="confirm_send_dialog_msg">"Are you sure you want to send the message ?"</string>
     <string name="google_developer_student_club">Google Developer Student Club</string>
     <string name="loading_please_wait">Loading…\nPlease Wait</string>
+    <string name="audit_app_instead">Audit App</string>
+    <string name="visit_ducs_website">Visit DUCS Website</string>
 </resources>

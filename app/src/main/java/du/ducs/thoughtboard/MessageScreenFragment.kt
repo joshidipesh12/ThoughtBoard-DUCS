@@ -1,6 +1,8 @@
 package du.ducs.thoughtboard
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -43,7 +45,6 @@ class MessageScreenFragment : Fragment() {
         val authorTextView = view.findViewById<TextView>(R.id.message_author)
         val messageTextView = view.findViewById<TextView>(R.id.message_content)
 
-        val message = view.resources.getString(R.string.dummy_message)
         titleTextView.text =  args.title
         authorTextView.text = args.name
         messageTextView.text = args.message
@@ -64,11 +65,11 @@ class MessageScreenFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.send_mail_to_author -> {
-                val emailIntent = Intent(Intent.ACTION_SEND)
-                emailIntent.type = "text/plain"
-                // set email to dummy_email and title to reply on dummy_title
+                val emailIntent = Intent(Intent.ACTION_SENDTO)
+                emailIntent.data = Uri.parse("mailto:")
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(args.email))
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Re: " + args.title)
+                val emailTitle = if (args.title.isNotBlank()) args.title else args.message
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Re: $emailTitle")
                 startActivity(emailIntent)
             }
         }

@@ -1,5 +1,6 @@
 package du.ducs.thoughtboard
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import du.ducs.thoughtboard.databinding.FragmentNewMessageBinding
 import androidx.core.content.ContextCompat.getSystemService
 
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 
 
@@ -56,26 +58,36 @@ class NewMessageFragment : Fragment() {
             R.id.send -> {
                 binding.titleEditText.clearFocus()
                 binding.newMessageEditText.clearFocus()
+                val imm = (activity as AppCompatActivity?)!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view?.windowToken, 0)
+
                 val title   = binding.titleEditText.text.toString()
                 val message = binding.newMessageEditText.text.toString()
 
-                if(title.isNotBlank() && message.isNotBlank()) {
-                    MaterialAlertDialogBuilder((activity as AppCompatActivity?)!!)
-                        .setTitle(R.string.confirm_send_dialog_msg)
-                        .setCancelable(true)
-                        .setPositiveButton("Yes") {
-                                _, _ ->
-                            run {
-                                viewModel.sendMessage(title, message)
-                                findNavController().navigateUp()
+                if(title.isNotBlank() || message.isNotBlank()) {
+                    if(viewModel.user?.email?.isNotBlank() == true){
+                        MaterialAlertDialogBuilder((activity as AppCompatActivity?)!!)
+                            .setTitle(R.string.confirm_send_dialog_msg)
+                            .setCancelable(true)
+                            .setPositiveButton("Yes") { _, _ ->
+                                run {
+                                    viewModel.sendMessage(title, message)
+                                    findNavController().navigateUp()
+                                }
                             }
-                        }
-                        .show()
+                            .show()
+                    } else {
+                        Toast.makeText(
+                            view?.context,
+                            "Can't Send Messages in Audit Mode!\nPlease SignUp with DUCS Email.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 } else {
-                    Snackbar.make(
-                        activity!!.findViewById(android.R.id.content),
-                        "Title & Message Can't Be Empty!!",
-                        Snackbar.LENGTH_SHORT
+                    Toast.makeText(
+                        view?.context,
+                        "Both Title & Message Can't Be Empty!",
+                        Toast.LENGTH_LONG
                     ).show()
                 }
             }

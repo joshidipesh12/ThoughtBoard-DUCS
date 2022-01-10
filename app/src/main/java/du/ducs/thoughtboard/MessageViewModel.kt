@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.material.internal.ContextUtils.getActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
@@ -14,7 +16,7 @@ import du.ducs.thoughtboard.model.Message
 import java.util.*
 
 class MessageViewModel : ViewModel() {
-    private val user = Firebase.auth.currentUser
+    val user = Firebase.auth.currentUser
     private val db = Firebase.firestore
 
     // Instance of the current logged-in user, if any.
@@ -28,17 +30,19 @@ class MessageViewModel : ViewModel() {
 
     fun sendMessage(title: String, message: String) {
         // Create message object from user information and provided values.
-        val msg = Message(
-            title = title, message = message,
-            userId = user?.displayName, emailId = user?.email
-        )
+        if(user?.email?.isNotBlank() == true){
+            val msg = Message(
+                title = title, message = message,
+                userId = user.displayName, emailId = user.email
+            )
 
-        db.collection(COLLECTION)
-            .add(msg.toHashMap())
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "Document added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e -> Log.d(TAG, "Error adding document", e) }
+            db.collection(COLLECTION)
+                .add(msg.toHashMap())
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "Document added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e -> Log.d(TAG, "Error adding document", e) }
+        }
     }
 
     fun deleteMessage(msgId: String) {

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -120,10 +121,6 @@ class HomeSignInFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -171,6 +168,12 @@ class HomeSignInFragment : Fragment() {
             }
         }
         signInBtn.setOnClickListener { displaySignIn() }
+
+        // setting audit button
+        val auditButton = view.findViewById<Button>(R.id.audit_button)
+        auditButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeSignInFragment_to_homeScreenFragment)
+        }
     }
 
     private fun displaySignIn() {
@@ -193,13 +196,7 @@ class HomeSignInFragment : Fragment() {
                 ?.addOnFailureListener(it) { e ->
                     // No Google Accounts found. Just continue presenting the signed-out UI.
                     Log.d(TAG, e.localizedMessage!!)
-                    val snack = Snackbar.make(
-                        activity!!.findViewById(android.R.id.content),
-                        "No Valid DUCS Email Found", Snackbar.LENGTH_LONG)
-                    snack.setAction("SignUp") {
-                        displaySignUp()
-                    }
-                    snack.show()
+                    displaySignUp()
                 }
         }
     }
@@ -222,11 +219,11 @@ class HomeSignInFragment : Fragment() {
                 }
                 ?.addOnFailureListener(it) { e ->
                     // No Google Accounts found. Just continue presenting the signed-out UI.
-                    Toast.makeText(
-                        activity,
-                        "Failed To Sign Up!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val snack = Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        "No Valid DUCS Email Found!\nTry Auditing App Instead.", Snackbar.LENGTH_LONG)
+                    snack.setAction("Okay") {snack.dismiss()}
+                    snack.show()
                     Log.d("btn click", e.localizedMessage!!)
                 }
         }
