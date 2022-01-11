@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import du.ducs.messageboard.adapter.MessageTileAdapter
 import java.text.SimpleDateFormat
@@ -52,19 +51,9 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
 
         val recyclerView = binding.recyclerView
-        recyclerView.layoutManager =
-            object : GridLayoutManager((activity as AppCompatActivity?)!!, 2) {
-                override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
-                    lp.height = (view.width / 2.3).toInt()
-                    return true
-                }
-            }
-
-        binding.noMessageView.visibility = View.VISIBLE
 
         adapter = MessageTileAdapter()
         viewModel.messages.observe(viewLifecycleOwner) {
-            binding.noMessageView.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             adapter.submitList(it)
         }
 

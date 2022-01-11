@@ -25,8 +25,14 @@
         <entry key="app/src/main/res/layout/activity_new_message.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/card_layout.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/fragment_about_us.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home_screen.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/fragment_home_signin.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/fragment_loading_screen.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/fragment_new_message.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/message_item.xml" value="0.335" />
+        <entry key="app/src/main/res/menu/layout_home_screen_menu.xml" value="0.259375" />
+        <entry key="app/src/main/res/menu/menu_new_message.xml" value="0.259375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2796875" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2796875" />
       </map>

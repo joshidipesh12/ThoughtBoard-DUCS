@@ -27,7 +27,7 @@
                 android:layout_marginStart="62dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginBottom="25dp"
-                android:text="@string/thought_board"
+                android:text="@string/message_board"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="28sp"

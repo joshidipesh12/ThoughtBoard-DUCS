@@ -26,11 +26,11 @@ class MessageViewModel : ViewModel() {
     val messages: LiveData<List<Message>>
         get() = _messages
 
-    fun sendMessage(title: String, message: String) {
+    fun sendMessage(message: String) {
         // Create message object from user information and provided values.
         if(user?.email?.isNotBlank() == true){
             val msg = Message(
-                title = title, message = message,
+                message = message,
                 userId = user.displayName, emailId = user.email
             )
 

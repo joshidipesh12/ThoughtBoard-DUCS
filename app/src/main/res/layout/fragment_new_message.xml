@@ -25,35 +25,12 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/title"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:hintTextColor="@color/light_blue"
-        app:boxStrokeColor="@color/light_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/title"
-        android:paddingStart="30dp"
-        android:paddingTop="30dp"
-        android:paddingEnd="30dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textCapSentences"
-            tools:ignore="TextContrastCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newMessage"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="584dp"
-        android:background="@drawable/ic_drawable_new_message_bg"
+        android:layout_height="wrap_content"
         android:hint="@string/message"
         android:paddingStart="30dp"
         android:paddingTop="16dp"
@@ -61,24 +38,19 @@
         android:paddingBottom="16dp"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/light_blue"
-        app:hintTextColor="@color/light_blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title">
+        app:hintTextColor="@color/light_blue">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newMessageEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top|start"
             android:inputType="textCapSentences|textMultiLine"
             android:isScrollContainer="false"
             android:maxHeight="500dp"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbarStyle="insideInset"
             android:scrollbarThumbVertical="@drawable/ic_drawable_scroll_indicator"
-            android:scrollbars="vertical"
-            android:verticalScrollbarPosition="right"
-            tools:ignore="TextContrastCheck" />
+            android:scrollbars="vertical"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
