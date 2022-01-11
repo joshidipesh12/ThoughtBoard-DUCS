@@ -1,18 +1,16 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.internal.ContextUtils.getActivity
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import du.ducs.thoughtboard.model.Message
+import du.ducs.messageboard.model.Message
 import java.util.*
 
 class MessageViewModel : ViewModel() {
@@ -28,11 +26,11 @@ class MessageViewModel : ViewModel() {
     val messages: LiveData<List<Message>>
         get() = _messages
 
-    fun sendMessage(title: String, message: String) {
+    fun sendMessage(message: String) {
         // Create message object from user information and provided values.
         if(user?.email?.isNotBlank() == true){
             val msg = Message(
-                title = title, message = message,
+                message = message,
                 userId = user.displayName, emailId = user.email
             )
 

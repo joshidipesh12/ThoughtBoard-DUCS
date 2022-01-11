@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard.adapter
+package du.ducs.messageboard.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +9,16 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import du.ducs.thoughtboard.HomeScreenFragmentDirections
-import du.ducs.thoughtboard.R
-import du.ducs.thoughtboard.model.Message
+import du.ducs.messageboard.HomeScreenFragmentDirections
+import du.ducs.messageboard.R
+import du.ducs.messageboard.model.Message
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MessageTileAdapter :
     ListAdapter<Message, MessageTileAdapter.MessageViewHolder>(DiffCallback) {
+
+    private val formatter = SimpleDateFormat("h:mm a", Locale.ENGLISH)
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Message>() {
@@ -23,9 +27,7 @@ class MessageTileAdapter :
             }
 
             override fun areContentsTheSame(oldMsg: Message, newMsg: Message): Boolean {
-                return oldMsg.title == newMsg.title
-                        && oldMsg.message == newMsg.message
-                        && oldMsg.userId == oldMsg.userId
+                return oldMsg.id == newMsg.id
             }
         }
     }
@@ -35,10 +37,9 @@ class MessageTileAdapter :
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Message object.
     class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val cardView: CardView = view.findViewById(R.id.message_card_view)
-        val title: TextView = view.findViewById(R.id.title)
-        val message: TextView = view.findViewById(R.id.message)
         val author: TextView = view.findViewById(R.id.author)
+        val time: TextView = view.findViewById(R.id.time)
+        val message: TextView = view.findViewById(R.id.message)
     }
 
     /**
@@ -47,7 +48,7 @@ class MessageTileAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         // create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.message_tile, parent, false)
+            .inflate(R.layout.message_item, parent, false)
 
         return MessageViewHolder(adapterLayout)
     }
@@ -57,19 +58,11 @@ class MessageTileAdapter :
      */
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val message = getItem(position)
-        holder.cardView.setOnClickListener { view -> openMessageInDetail(view, message) }
-        holder.title.text = message.title
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = message.timestamp
         holder.message.text = message.message
         holder.author.text = message.userId
+        holder.time.text = formatter.format(calendar.time)
     }
 
-    private fun openMessageInDetail(view: View, message: Message) {
-        val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToMessageScreenFragment(
-            message.userId!!,
-            message.title!!,
-            message.message!!,
-            message.emailId!!
-        )
-        view.findNavController().navigate(action)
-    }
 }

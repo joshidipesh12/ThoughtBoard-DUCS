@@ -1,11 +1,10 @@
-package du.ducs.thoughtboard.model
+package du.ducs.messageboard.model
 
 import java.util.*
 import kotlin.collections.HashMap
 
 data class Message(
     var id: String? = null,
-    var title: String? = null,
     var message: String? = null,
     var timestamp: Long = Calendar.getInstance().timeInMillis,
     var userId: String? = null,
@@ -15,7 +14,6 @@ data class Message(
     // id is not to be stored in document
     fun toHashMap(): HashMap<String, Any> {
         return hashMapOf(
-            "title" to (title ?: ""),
             "message" to (message ?: ""),
             "timestamp" to timestamp,
             "userId" to (userId ?: ""),

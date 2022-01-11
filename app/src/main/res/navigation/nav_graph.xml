@@ -6,12 +6,12 @@
     app:startDestination="@id/loadingScreenFragment">
     <fragment
         android:id="@+id/aboutUsFragment"
-        android:name="du.ducs.thoughtboard.AboutUsFragment"
+        android:name="du.ducs.messageboard.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="du.ducs.thoughtboard.HomeScreenFragment"
+        android:name="du.ducs.messageboard.HomeScreenFragment"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" >
         <action
@@ -32,13 +32,13 @@
     </fragment>
     <fragment
         android:id="@+id/newMessageFragment"
-        android:name="du.ducs.thoughtboard.NewMessageFragment"
+        android:name="du.ducs.messageboard.NewMessageFragment"
         android:label="fragment_new_message"
         tools:layout="@layout/fragment_new_message" >
     </fragment>
     <fragment
         android:id="@+id/messageScreenFragment"
-        android:name="du.ducs.thoughtboard.MessageScreenFragment"
+        android:name="du.ducs.messageboard.MessageScreenFragment"
         android:label="fragment_message_screen"
         tools:layout="@layout/fragment_message_screen" >
         <argument
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeSignInFragment"
-        android:name="du.ducs.thoughtboard.HomeSignInFragment"
+        android:name="du.ducs.messageboard.HomeSignInFragment"
         android:label="fragment_home_signin"
         tools:layout="@layout/fragment_home_signin" >
         <action
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/loadingScreenFragment"
-        android:name="du.ducs.thoughtboard.LoadingScreenFragment"
+        android:name="du.ducs.messageboard.LoadingScreenFragment"
         android:label="fragment_loading_screen"
         tools:layout="@layout/fragment_loading_screen" >
         <action

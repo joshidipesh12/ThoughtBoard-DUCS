@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

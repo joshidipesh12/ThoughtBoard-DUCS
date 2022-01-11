@@ -23,7 +23,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "du.ducs.thoughtboard"
+        applicationId "du.ducs.messageboard"
         minSdk 22
         targetSdk 31
         versionCode 1

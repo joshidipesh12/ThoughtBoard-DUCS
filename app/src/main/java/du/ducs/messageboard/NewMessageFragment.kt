@@ -1,20 +1,17 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
-import du.ducs.thoughtboard.databinding.FragmentNewMessageBinding
-import androidx.core.content.ContextCompat.getSystemService
+import du.ducs.messageboard.databinding.FragmentNewMessageBinding
 
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 
 
 class NewMessageFragment : Fragment() {
@@ -44,7 +41,13 @@ class NewMessageFragment : Fragment() {
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
         activity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_drawable_back)
         activity.supportActionBar!!.title = ""
+    }
 
+    override fun onStart() {
+        super.onStart()
+        binding.newMessageEditText.requestFocus()
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -56,26 +59,16 @@ class NewMessageFragment : Fragment() {
         when(item.itemId) {
             //onClick for send
             R.id.send -> {
-                binding.titleEditText.clearFocus()
                 binding.newMessageEditText.clearFocus()
                 val imm = (activity as AppCompatActivity?)!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view?.windowToken, 0)
 
-                val title   = binding.titleEditText.text.toString()
                 val message = binding.newMessageEditText.text.toString()
 
-                if(title.isNotBlank() || message.isNotBlank()) {
+                if(message.isNotBlank()) {
                     if(viewModel.user?.email?.isNotBlank() == true){
-                        MaterialAlertDialogBuilder((activity as AppCompatActivity?)!!)
-                            .setTitle(R.string.confirm_send_dialog_msg)
-                            .setCancelable(true)
-                            .setPositiveButton("Yes") { _, _ ->
-                                run {
-                                    viewModel.sendMessage(title, message)
-                                    findNavController().navigateUp()
-                                }
-                            }
-                            .show()
+                        viewModel.sendMessage(message)
+                        findNavController().navigateUp()
                     } else {
                         Toast.makeText(
                             view?.context,
@@ -86,8 +79,8 @@ class NewMessageFragment : Fragment() {
                 } else {
                     Toast.makeText(
                         view?.context,
-                        "Both Title & Message Can't Be Empty!",
-                        Toast.LENGTH_LONG
+                        "Message Can't Be Empty!",
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
             }

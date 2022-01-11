@@ -15,7 +15,6 @@
         android:contentDescription="@string/app_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.135"
@@ -27,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:foregroundTint="#FFFFFF"
-        android:text="@string/thought_board"
+        android:text="@string/message_board"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -53,12 +52,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.144" />
+        app:layout_constraintVertical_bias="0.34" />
 
     <TextView
         android:id="@+id/textView3"
@@ -75,43 +74,28 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="259dp"
-        android:layout_height="45dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:contentDescription="@string/gdsc_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signin_btn"
-        app:layout_constraintVertical_bias="0.602"
-        app:srcCompat="@drawable/gdsc_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias=".9"
+        app:srcCompat="@drawable/ducs_logo" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:text="@string/google_developer_student_club"
         android:textColor="#000000"
         android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/audit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/audit_app_instead"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintVertical_bias=".95" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard.data
+package du.ducs.messageboard.data
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

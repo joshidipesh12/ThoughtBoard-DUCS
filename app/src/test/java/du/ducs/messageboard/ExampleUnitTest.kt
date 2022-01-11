@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import org.junit.Test
 

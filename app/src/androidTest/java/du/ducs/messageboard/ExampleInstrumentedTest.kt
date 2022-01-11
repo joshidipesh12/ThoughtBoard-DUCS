@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

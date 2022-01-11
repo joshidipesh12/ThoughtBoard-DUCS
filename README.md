@@ -35,7 +35,7 @@ The App has a very simple and interactive interface which allows the students to
 
 The app is currently in the Alpha testing phase with 2021-22 batch students of Department of Computer Science, University of Delhi, You can access the app here : [ThoughtBoard DUCS](https://github.com/joshidipesh12/ThoughtBoard-DUCS/raw/main/DUCS_ASJ21_Release_0.0.1.apk).
 
-For nowOnce the app is fully tested during the Sankalan'21 event (the annual departmental fest event), we plan to make it the primary mode of communication and resource sharing with the addition of features like:
+Once the app is fully tested during the Sankalan'21 event (the annual departmental fest event), we plan to make it the primary mode of communication and resource sharing with the addition of features like:
  - support for sharing docs and links
  - grouping messages by themes/hashtags/events
  - feature for saving favourite messages locally or on cloud
