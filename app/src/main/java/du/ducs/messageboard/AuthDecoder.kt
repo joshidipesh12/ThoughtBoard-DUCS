@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import android.util.Base64
 import android.util.Log

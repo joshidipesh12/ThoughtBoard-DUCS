@@ -1,10 +1,10 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import du.ducs.thoughtboard.data.*
+import du.ducs.messageboard.data.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 import org.junit.After

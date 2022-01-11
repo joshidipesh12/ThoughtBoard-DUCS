@@ -1,7 +1,7 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import android.app.Application
-import du.ducs.thoughtboard.data.AppDatabase
+import du.ducs.messageboard.data.AppDatabase
 
 class ThoughtboardApp : Application() {
     val database: AppDatabase by lazy { AppDatabase.getInstance(this) }

@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard
+package du.ducs.messageboard
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -11,10 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import du.ducs.thoughtboard.adapter.MessageTileAdapter
+import du.ducs.messageboard.adapter.MessageTileAdapter
 import java.text.SimpleDateFormat
 import java.util.*
-import du.ducs.thoughtboard.databinding.FragmentHomeScreenBinding
+import du.ducs.messageboard.databinding.FragmentHomeScreenBinding
 
 class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
     DatePickerDialog.OnDateSetListener, RecyclerView.OnItemTouchListener {

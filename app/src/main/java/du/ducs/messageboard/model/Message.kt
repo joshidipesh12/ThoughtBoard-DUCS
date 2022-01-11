@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard.model
+package du.ducs.messageboard.model
 
 import java.util.*
 import kotlin.collections.HashMap

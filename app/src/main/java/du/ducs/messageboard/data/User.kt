@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard.data
+package du.ducs.messageboard.data
 
 import androidx.annotation.NonNull
 import androidx.room.Entity

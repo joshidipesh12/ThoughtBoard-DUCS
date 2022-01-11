@@ -1,4 +1,4 @@
-package du.ducs.thoughtboard.adapter
+package du.ducs.messageboard.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +9,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import du.ducs.thoughtboard.HomeScreenFragmentDirections
-import du.ducs.thoughtboard.R
-import du.ducs.thoughtboard.model.Message
+import du.ducs.messageboard.HomeScreenFragmentDirections
+import du.ducs.messageboard.R
+import du.ducs.messageboard.model.Message
 
 class MessageTileAdapter :
     ListAdapter<Message, MessageTileAdapter.MessageViewHolder>(DiffCallback) {
