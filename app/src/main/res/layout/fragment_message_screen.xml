@@ -20,19 +20,19 @@
 
     <ScrollView
         android:id="@+id/scroll_view"
-        android:layout_width="410dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="641dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_top"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp">
+            android:layout_height="300dp">
 
             <TextView
                 android:id="@+id/message_title"
@@ -51,7 +51,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.006" />
+                app:layout_constraintVertical_bias="0.072" />
 
             <TextView
                 android:id="@+id/message_author"
@@ -82,6 +82,7 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/message_title"
                 app:layout_constraintVertical_bias="1.0"
