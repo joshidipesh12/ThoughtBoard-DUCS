@@ -15,43 +15,10 @@
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" >
         <action
-            android:id="@+id/action_homeScreenFragment_to_newMessageFragment"
-            app:destination="@id/newMessageFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_homeScreenFragment_to_messageScreenFragment"
-            app:destination="@id/messageScreenFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
             android:id="@+id/action_homeScreenFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/newMessageFragment"
-        android:name="du.ducs.messageboard.NewMessageFragment"
-        android:label="fragment_new_message"
-        tools:layout="@layout/fragment_new_message" >
-    </fragment>
-    <fragment
-        android:id="@+id/messageScreenFragment"
-        android:name="du.ducs.messageboard.MessageScreenFragment"
-        android:label="fragment_message_screen"
-        tools:layout="@layout/fragment_message_screen" >
-        <argument
-            android:name="name"
-            app:argType="string" />
-        <argument android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="message"
-            app:argType="string" />
-        <argument
-            android:name="email"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homeSignInFragment"

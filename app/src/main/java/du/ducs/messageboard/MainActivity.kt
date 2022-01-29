@@ -12,7 +12,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MessageViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,27 +24,19 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-
-        // TODO: Switch to using room stored user
-        // val user = viewModel.currentUser
-        // Log.d(TAG, "Auth user email: ${user?.email}")
-
-        // if (user != null) {
-        //     val navHostFragment = supportFragmentManager
-        //         .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        //     navController = navHostFragment.navController
-
-        //     // FIXME: Decide how to setup navController with the activity's non-existent action bar.
-        if (actionBar!=null) {
+        if (actionBar != null) {
             setupActionBarWithNavController(navController)
         }
         val auth = Firebase.auth
         Log.d(TAG, "Auth user email: ${auth.currentUser?.email}")
-        if (auth.currentUser != null) {
-            navController.navigate(R.id.action_loadingScreenFragment_to_homeScreenFragment)
-        } else {
-            Log.d(TAG, "Starting Sign-in Process")
-            navController.navigate(R.id.action_loadingScreenFragment_to_homeSignInFragment)
+        // navigation controller restores state properly across config changes automatically
+        if (savedInstanceState == null) {
+            if (auth.currentUser != null) {
+                navController.navigate(R.id.action_loadingScreenFragment_to_homeScreenFragment)
+            } else {
+                Log.d(TAG, "Starting Sign-in Process")
+                navController.navigate(R.id.action_loadingScreenFragment_to_homeSignInFragment)
+            }
         }
     }
 

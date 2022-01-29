@@ -2,6 +2,7 @@ package du.ducs.messageboard
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,17 +53,30 @@ class HomeScreenFragment : Fragment() {
 
         recyclerView.adapter = adapter
 
-        binding.newMsgButton.setOnClickListener {
-            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToNewMessageFragment()
-            findNavController().navigate(action)
+        binding.newMsgButton.setOnClickListener { sendMessage() }
+    }
+
+    private fun sendMessage() {
+        val message = binding.newMessageEditText.text.toString()
+        if (message.isNotBlank()) {
+            if (viewModel.user?.email?.isNotBlank() == true) {
+                viewModel.sendMessage(message)
+                binding.newMessageEditText.setText("")
+            } else {
+                Toast.makeText(
+                    view?.context,
+                    "Can't Send Messages in Audit Mode!\nPlease SignUp with DUCS Email.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
     private fun processNewMessages(newMessages: MutableList<Message>) {
         val actuallyNewMessages = newMessages.minus(messages)
-        messages.addAll(actuallyNewMessages)
-        adapter.notifyItemRangeInserted(messages.size - 1, actuallyNewMessages.size)
-        binding.recyclerView.scrollToPosition(messages.size - 1)
+        messages.addAll(0, actuallyNewMessages)
+        adapter.notifyItemRangeInserted(0, actuallyNewMessages.size)
+        binding.recyclerView.scrollToPosition(0)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

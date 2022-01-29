@@ -52,7 +52,7 @@ class MessageViewModel : ViewModel() {
 
     fun initMessages(msgCount: Int) {
         db.collection(COLLECTION)
-            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .limit(msgCount.toLong())
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
