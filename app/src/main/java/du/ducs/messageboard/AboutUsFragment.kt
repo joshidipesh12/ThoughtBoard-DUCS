@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 
 class AboutUsFragment : Fragment() {
@@ -22,6 +24,14 @@ class AboutUsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity: AppCompatActivity = (activity as AppCompatActivity)
+
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        activity.setSupportActionBar(toolbar)
+
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        activity.supportActionBar?.setDisplayShowTitleEnabled(true)
 
         val websiteLink = view.findViewById<TextView>(R.id.visit_website)
         websiteLink.setOnClickListener {

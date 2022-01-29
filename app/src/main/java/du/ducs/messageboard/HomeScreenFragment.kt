@@ -1,22 +1,17 @@
 package du.ducs.messageboard
 
-import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.DatePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import du.ducs.messageboard.adapter.MessageTileAdapter
-import java.text.SimpleDateFormat
-import java.util.*
 import du.ducs.messageboard.databinding.FragmentHomeScreenBinding
+import du.ducs.messageboard.model.Message
 
-class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
-    DatePickerDialog.OnDateSetListener, RecyclerView.OnItemTouchListener {
+class HomeScreenFragment : Fragment() {
 
     // The view binding to access views.
     private var _binding: FragmentHomeScreenBinding? = null
@@ -24,12 +19,12 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
 
     private val viewModel: MessageViewModel by viewModels()
     private lateinit var adapter: MessageTileAdapter
+    private val messages = mutableListOf<Message>()
 
-    // Date formatter for the action bar title.
-    private val formatter = SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.ENGLISH)
-
-    // The calendar instance maintaining the current selected date.
-    private val calendar = Calendar.getInstance()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.initMessages(100)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,39 +42,41 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
         val toolbar = binding.toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
 
-        val sMyDate = formatter.format(calendar.time)
-        (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
-
         val recyclerView = binding.recyclerView
 
-        adapter = MessageTileAdapter()
-        viewModel.messages.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        adapter = MessageTileAdapter(messages)
+        viewModel.newMessages.observe(viewLifecycleOwner) { newMessages ->
+            processNewMessages(
+                newMessages
+            )
         }
 
         recyclerView.adapter = adapter
-        recyclerView.setHasFixedSize(true)
 
-        binding.newMsgButton.setOnClickListener {
-            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToNewMessageFragment()
-            findNavController().navigate(action)
+        binding.newMsgButton.setOnClickListener { sendMessage() }
+    }
+
+    private fun sendMessage() {
+        val message = binding.newMessageEditText.text.toString()
+        if (message.isNotBlank()) {
+            if (viewModel.user?.email?.isNotBlank() == true) {
+                viewModel.sendMessage(message)
+                binding.newMessageEditText.setText("")
+            } else {
+                Toast.makeText(
+                    view?.context,
+                    "Can't Send Messages in Audit Mode!\nPlease SignUp with DUCS Email.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
+    }
 
-        binding.aboutButton.setOnClickListener {
-            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToAboutUsFragment()
-            findNavController().navigate(action)
-        }
-
-        calendar.set(
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH),
-            0, 0, 0,
-        )
-        Log.d(TAG, "Got time: ${calendar.timeInMillis}")
-
-        // Pass the date to the view model to initiate a load request
-        viewModel.setDateFilter(calendar)
+    private fun processNewMessages(newMessages: MutableList<Message>) {
+        val actuallyNewMessages = newMessages.minus(messages)
+        messages.addAll(0, actuallyNewMessages)
+        adapter.notifyItemRangeInserted(0, actuallyNewMessages.size)
+        binding.recyclerView.scrollToPosition(0)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -88,49 +85,17 @@ class HomeScreenFragment : Fragment(), DatePicker.OnDateChangedListener,
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        showDatePickerDialog()
+        when (item.itemId) {
+            R.id.about_us -> {
+                val action =
+                    HomeScreenFragmentDirections.actionHomeScreenFragmentToAboutUsFragment()
+                findNavController().navigate(action)
+            }
+            R.id.saved_messages -> {
+                // TODO
+            }
+        }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun showDatePickerDialog() {
-        val datePickerDialog = DatePickerDialog(
-            activity!!, this,
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        )
-
-        datePickerDialog.show()
-    }
-
-    override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        calendar.set(year, monthOfYear, dayOfMonth)
-
-        val sMyDate = formatter.format(calendar.time)
-        (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
-    }
-
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        calendar.set(year, month, dayOfMonth)
-
-        val sMyDate = formatter.format(calendar.time)
-        (activity as AppCompatActivity?)!!.supportActionBar?.title = sMyDate
-
-        viewModel.setDateFilter(calendar)
-    }
-
-    override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-        // try avoiding this implementation
-        return true
-    }
-
-    // item click listener
-    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-        // try avoiding this implementation
     }
 
     companion object {

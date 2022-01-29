@@ -4,33 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import du.ducs.messageboard.HomeScreenFragmentDirections
 import du.ducs.messageboard.R
 import du.ducs.messageboard.model.Message
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MessageTileAdapter :
-    ListAdapter<Message, MessageTileAdapter.MessageViewHolder>(DiffCallback) {
-
-    private val formatter = SimpleDateFormat("h:mm a", Locale.ENGLISH)
-
-    companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<Message>() {
-            override fun areItemsTheSame(oldMsg: Message, newMsg: Message): Boolean {
-                return oldMsg === newMsg
-            }
-
-            override fun areContentsTheSame(oldMsg: Message, newMsg: Message): Boolean {
-                return oldMsg.id == newMsg.id
-            }
-        }
-    }
+class MessageTileAdapter(private val messages: MutableList<Message>) :
+    RecyclerView.Adapter<MessageTileAdapter.MessageViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -57,12 +38,31 @@ class MessageTileAdapter :
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        val message = getItem(position)
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = message.timestamp
+        val message = messages[position]
         holder.message.text = message.message
         holder.author.text = message.userId
-        holder.time.text = formatter.format(calendar.time)
+        holder.time.text = getFormattedTime(message.timestamp)
+    }
+
+    private fun getFormattedTime(timestamp: Long): String {
+        val cal = Calendar.getInstance()
+        cal.timeInMillis = timestamp
+        val today = Calendar.getInstance()
+        // Check if the timestamp is of today and format accordingly
+        return if ((cal.get(Calendar.ERA) == today.get(Calendar.ERA) &&
+                    cal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                    cal.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR))
+        ) {
+            val formatter = SimpleDateFormat("h:mm a", Locale.ENGLISH)
+            formatter.format(cal.time)
+        } else {
+            val formatter = SimpleDateFormat("dd/MM/yy", Locale.ENGLISH)
+            formatter.format(cal.time)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return messages.size
     }
 
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".HomeSignInFragment">
 
 
@@ -27,7 +26,6 @@
         android:layout_height="wrap_content"
         android:foregroundTint="#FFFFFF"
         android:text="@string/message_board"
-        android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +39,6 @@
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="@string/department_of_computer_science_university_of_delhi"
-        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +62,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/with_ducs_domain_email"
-        android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/signin_btn"
         app:layout_constraintHorizontal_bias="0.508"
@@ -89,7 +85,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/google_developer_student_club"
-        android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

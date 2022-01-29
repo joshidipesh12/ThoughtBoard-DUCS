@@ -9,7 +9,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue">#FF30B3E7</color>
     <color name="app_logo_background">#2FB2E6</color>
-    <color name="light_background">#eeeeee</color>
+    <color name="light_background">#FFFFFF</color>
+
+    <color name="background_1">#2C2F33</color>
+    <color name="background_2">#202325</color>
+    <color name="text_color_1">#ffffff</color>
+    <color name="text_color_2">#cccccc</color>
+    <color name="text_color_3">#aaaaaa</color>
+
     <color name="text_color_dark">#666666</color>
     <color name="text_color_darker">#111111</color>
     <color name="text_color_darkest">#000000</color>

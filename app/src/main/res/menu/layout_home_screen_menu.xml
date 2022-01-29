@@ -2,9 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/date_picker"
-        android:title="@string/home_screen_menu"
-        android:icon="@drawable/ic_drawable_date_picker"
-        app:showAsAction="always"/>
+    <item android:id="@+id/saved_messages"
+        android:title="@string/saved_messages"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/about_us"
+        android:title="@string/about"
+        app:showAsAction="never"/>
 
 </menu>

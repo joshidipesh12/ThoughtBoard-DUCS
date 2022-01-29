@@ -17,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.Scope
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
@@ -41,10 +42,10 @@ class HomeSignInFragment : Fragment() {
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(webClientId)
-            .requestEmail()
+            .requestEmail().requestScopes(Scope("profile"))
             .build()
 
-        googleSignInClient = GoogleSignIn.getClient(activity!!, gso)
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -91,7 +92,6 @@ class HomeSignInFragment : Fragment() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        val auth = Firebase.auth
         activity?.let {
             auth.signInWithCredential(credential)
                 .addOnCompleteListener(it) { task ->

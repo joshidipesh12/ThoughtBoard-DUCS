@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -21,10 +22,10 @@ class MessageViewModel : ViewModel() {
     val currentUser: FirebaseUser?
         get() = user
 
-    private val _messages = MutableLiveData<List<Message>>()
+    private val _newMessages = MutableLiveData<MutableList<Message>>()
     // observe this variable to get new message updates
-    val messages: LiveData<List<Message>>
-        get() = _messages
+    val newMessages: LiveData<MutableList<Message>>
+        get() = _newMessages
 
     fun sendMessage(message: String) {
         // Create message object from user information and provided values.
@@ -49,28 +50,28 @@ class MessageViewModel : ViewModel() {
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 
-    // datetime object should have the hours, minutes, seconds set to zero
-    fun setDateFilter(calendar: Calendar) {
+    fun initMessages(msgCount: Int) {
         db.collection(COLLECTION)
-            .whereGreaterThan("timestamp", getDayOneTimeStamp(calendar))
-            .whereLessThan("timestamp", getDayTwoTimeStamp(calendar))
             .orderBy("timestamp", Query.Direction.DESCENDING)
-            .addSnapshotListener { value, e ->
+            .limit(msgCount.toLong())
+            .addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Log.d(TAG, "listen failed", e)
                     return@addSnapshotListener
                 }
 
                 val newMessageList = mutableListOf<Message>()
-                if (value != null) {
-                    for (doc in value) {
-                        val message = doc.toObject<Message>()
-                        message.id = doc.id
+                for (doc in snapshot!!.documentChanges) {
+                    if (doc.type == DocumentChange.Type.ADDED) {
+                        val message = doc.document.toObject<Message>()
+                        message.id = doc.document.id
                         newMessageList.add(message)
                     }
                 }
-                _messages.value = newMessageList
-                Log.d(TAG, "Messages: ${_messages.value}")
+
+                _newMessages.value = newMessageList
+
+                Log.d(TAG, "Messages: ${_newMessages.value}")
             }
     }
 
